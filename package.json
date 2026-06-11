@@ -1,0 +1,57 @@
+{
+  "name": "heading-search-index",
+  "version": "0.1.0",
+  "description": "Generate a client-side MiniSearch index from page headings discovered through sitemaps.",
+  "type": "module",
+  "license": "MIT",
+  "bin": {
+    "heading-search-index": "./dist/cli.js"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./client": {
+      "types": "./dist/client.d.ts",
+      "import": "./dist/client.js"
+    }
+  },
+  "files": [
+    "dist",
+    "examples",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "tsup",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "dependencies": {
+    "cheerio": "^1.1.0",
+    "commander": "^14.0.0",
+    "fast-xml-parser": "^5.2.5",
+    "jiti": "^2.4.2",
+    "minisearch": "^7.1.2",
+    "p-limit": "^7.1.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.29.0",
+    "@types/node": "^24.0.0",
+    "eslint": "^9.29.0",
+    "prettier": "^3.5.3",
+    "tsup": "^8.5.0",
+    "typescript": "^5.8.3",
+    "typescript-eslint": "^8.34.0",
+    "vitest": "^3.2.3"
+  }
+}

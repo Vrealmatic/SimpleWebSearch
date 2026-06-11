@@ -1,0 +1,1382 @@
+[
+  {
+    "id": "/3d-scan",
+    "title": "3D scan - Information about 3D scanning and subsequent modifications",
+    "h1": "3D Scan Wiki",
+    "h2": "",
+    "h3": "Guides",
+    "h4": "",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/ai",
+    "title": "AI Integration for Business Workflows | Vrealmatic",
+    "h1": "We turn AI into a working part of your business",
+    "h2": "What we define before AI starts working AI should not be a side tool. It should become a useful layer of how work gets done. AI can support the whole company or only the exact part that needs it. Start with a concrete AI workflow, then expand only where the value is proven. We start from your work, not from a model name. Before implementation, know the boundaries. Tell us what your people repeat, check, write, decide or search for every week.",
+    "h3": "For people and roles For processes For websites and content AI SEO Optimizer AI web audit Map the opportunity Define control Build the workflow Measure and improve Before You Start with AI: Value, Risk, and Safe Use AI Assistant for Human Work AI Automation: Process First, AI Second AI Cost Optimization AI Automation Server",
+    "h4": "",
+    "h5": "",
+    "h6": "AI consulting"
+  },
+  {
+    "id": "/ai/application-security",
+    "title": "AI Application Security: Best Practices for LLM, RAG and Agentic Systems",
+    "h1": "AI Application Security: Technical Best Practices",
+    "h2": "Why AI application security is different Threat modeling before implementation Prompt injection and instruction/data confusion RAG security and document access control Tool calling and agent permissions Guardrails and policy controls Data protection, privacy and secrets Secure AI development lifecycle and CI/CD evaluations Observability, audit and incident response Model and supply-chain security Governance and ownership Reference architecture for a secure AI application Final pre-production checklist",
+    "h3": "Practical threat-modeling checklist Before retrieval During ingestion During answer generation During lifecycle changes Read-only tools Prepare tools Write tools External and destructive tools Tool-calling checklist Incident response playbook Architecture Data and RAG Agents and tools Testing Operations Governance Related AI guides Want to deploy AI with clear security boundaries?",
+    "h4": "",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/ai/assistant",
+    "title": "AI Assistant for Human Work | Personal AI Assistants for Employees",
+    "h1": "AI Assistant for Human Work",
+    "h2": "AI assistant works when asked — for the employee, in the context of their real work. Human work stays human What the assistant does Configured around real work Security and control Summary",
+    "h3": "Research and verification Internal knowledge Preparation and structure Connected tools Want to set up AI assistants for your employees?",
+    "h4": "",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/ai/automation",
+    "title": "AI Automation: Process First, AI Second",
+    "h1": "Before AI Automation: Process First, AI Second",
+    "h2": "Before AI automation: Process first, AI second AI belongs inside the process, not above it Do not automate an undefined process Practical prompts for discovering what to automate Integration guide: how to move from AI assistance to automation Human approval is part of the architecture AI automation needs boundaries Where to start, and what to postpone Measure before scaling Practical checklist before AI automation Summary",
+    "h3": "When X happens, do Y Understand X, then prepare or execute the next step Good path Bad path Draft missing processes Prioritize automation candidates Ask how to automate one workflow at a time 1. Start with manual AI-assisted work 2. Map the workflow before integration Process definition AI integration design 3. Increase the level of AI involvement gradually AI suggests AI prepares AI executes with approval AI executes within limits AI operates autonomously Usually safe to automate earlier Keep approval gates Customer support Sales and lead processing Documents and e-mail Reporting and monitoring Website and SEO operations Development workflows Prioritize now Postpone or keep human approval Time Quality Risk Cost Adoption Business value Want to automate business processes with AI?",
+    "h4": "",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/ai/automation-server",
+    "title": "Dedicated AI Automation Server",
+    "h1": "AI Automation Server for Business Workflows",
+    "h2": "What Is an AI Automation Server? Why Companies Should Care What an AI Server Enables in Practice Existing Self-Hosted and Open-Source Tools Recommended Architecture AI Agents and Tools Security and Isolation Operation and Remote Management Implementation Roadmap Practical Summary",
+    "h3": "The main business reasons Practical business workflows Example mental model How to choose the foundation Recommended base stack Recommended folder structure Direct API vs CLI agent What about MCP servers? Recommended baseline Secrets should not live in the task folder Minimum dashboard functionality Remote administration Managed service model Phase 1: Controlled prototype Phase 2: Scheduled automation Phase 3: Dashboard Phase 4: Stronger isolation and integrations Need a controlled AI automation environment?",
+    "h4": "Business automation first AI application first Software engineering first Operations dashboard first Direct API CLI agent Good Bad",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/ai/cost-optimization",
+    "title": "AI Cost Optimization: Use the Right Model, Tool, and Workflow",
+    "h1": "AI Cost Optimization: Use the Right Model, Tool, and Workflow",
+    "h2": "The cheapest AI setup is not created by choosing the cheapest model Three cost strategies: buy, build, or combine Finished AI tools, terminals, and agents OpenRouter as a layer between your app and models Optimization levers: where AI cost actually appears How to choose the cheapest reasonable model Cost optimization checklist Summary",
+    "h3": "Finished AI tool or subscription Custom API workflow Your control layer plus a finished agent Chat and finished tool Agent over a project API workflow When it helps What to watch Buy: finished tool Build: API workflow Hybrid: your control layer Want to make AI cheaper without making it worse?",
+    "h4": "",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/ai/llmo",
+    "title": "LLMO, AIO, GEO, AEO: AI Optimization for Search | Vrealmatic",
+    "h1": "LLMO, AIO, GEO, AEO: AI Optimization for Modern Search",
+    "h2": "AI optimization is the new layer of discoverability How LLMO, AIO, GEO, and AEO fit together LLMO: Large Language Model Optimization AIO: AI Optimization for AI-assisted search GEO: Generative Engine Optimization AEO: Answer Engine Optimization Implementation workflow How to measure AI optimization Other terms you may see Summary",
+    "h3": "LLMO AIO GEO AEO What LLMO is How LLMO differs from SEO Why you want it Supporting discipline: Entity SEO and Knowledge Graph Optimization LLMO from Vrealmatic Step-by-step LLMO workflow What AIO is What it can bring Supporting discipline: SXO AIO from Vrealmatic Step-by-step AIO workflow What GEO is Supporting discipline: source and citation optimization GEO from Vrealmatic Step-by-step GEO workflow What AEO is Supporting discipline: Zero-click and voice search optimization AEO from Vrealmatic Step-by-step AEO workflow Visibility signals Business signals AI SEO / LLM SEO GSO / SGO AISO / GAIO / ALLMO Agentic Search Optimization Want to improve your visibility in AI answers?",
+    "h4": "",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/ai/seo-optimizer",
+    "title": "AI SEO Optimizer | Vrealmatic",
+    "h1": "Optimize hundreds of pages with AI drafts and human approval",
+    "h2": "For websites where manual SEO optimization does not scale. AI prepares better content candidates. Editors decide what goes live. Built for repeatable optimization, not one-off copywriting. A module for your current CMS, database or internal admin. Pilot deployment is already running. Want to optimize content at scale?Let us design the workflow around your website.",
+    "h3": "Data-informed improvements Natural public content Controlled publishing",
+    "h4": "",
+    "h5": "",
+    "h6": "Consultant, Vrealmatic"
+  },
+  {
+    "id": "/ai/value-vs-security",
+    "title": "Before You Start with AI: Value, Risk, and Safe Use",
+    "h1": "Before You Start with AI: Value, Risk, and Safe Use",
+    "h2": "AI is excellent, easy to adopt, and immediately useful. That is exactly why it needs careful integration. The real risk axis: information, permissions, and reach Main risks to avoid Safety baseline: architecture and isolation options Practical checklist before enabling an AI agent Summary Where to go next",
+    "h3": "Information exposure Operational reach AI answers AI reads AI writes AI acts AI for one user AI for multiple people Choose the right depth of isolation Same user, dedicated workspace Separate user account Virtual machine or container Separate computer or server Rules that scale from one user to many Windows macOS AI Automation Server AI Application Security AI SEO Optimizer Discuss AI integration Want to integrate AI safely into your work?",
+    "h4": "",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/ai/web-audit",
+    "title": "AI website audit and technical fixes | Vrealmatic",
+    "h1": "We refine your AI-built website",
+    "h2": "The website exists. Now let us make it technically reliable. We check the technical layers that are easy to miss in the first build. The audit does not end with a document. We help fix the problems. Vibe coding can build a website quickly. An audit makes it ready for operation. Have an AI-built website that looks good?Let us check if it is technically healthy.",
+    "h3": "Indexing and technical SEO Content structure Performance and usability Security and operation Audit Prioritization Fixes Review",
+    "h4": "",
+    "h5": "",
+    "h6": "Consultant, Vrealmatic"
+  },
+  {
+    "id": "/app",
+    "title": "Industry and Business Applications | Vrealmatic.com",
+    "h1": "Industry and Business Applications",
+    "h2": "What app do you need?Let us know!",
+    "h3": "",
+    "h4": "",
+    "h5": "",
+    "h6": "Consultant, Olomouc, Czechia"
+  },
+  {
+    "id": "/app/code-scanner-mobile-app",
+    "title": "About code scanner mobile app | Scan barcodes with the phone",
+    "h1": "Co-reader | About our code scanner mobile app",
+    "h2": "Concept of Reading Barcodes and QR Codes with a Mobile Phone Advantages of using barcode scanner on a phone compared to specialized devices and data terminals Supported Code Formats Connecting the scanner to other systems Customization",
+    "h3": "One-dimensional (1D) codes Two-dimensional (2D) codes The ideal application?",
+    "h4": "",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/app/production-planning",
+    "title": "CapacityCheck - Planning with regard to maximum utilization",
+    "h1": "CapacityCheck - Planning with regard to maximum utilization while avoiding bottlenecks.",
+    "h2": "Do you know what your manufacturing, storage, logistics, labor or other capacity is when producing simultaneously? Where is the risk of bottleneck? And how to plan to utilize these capacities to the maximum? Easy Planning? Manager plans, life changes. How will planning software help with that? Helper for workplace layout & scheduling",
+    "h3": "Production planner from Vrealmatics",
+    "h4": "",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/app/warehouse-management",
+    "title": "Real-time overview & management for a warehouse | Uni WMS module",
+    "h1": "Warehouse real-time overview & management",
+    "h2": "Inventory. Do you know the exact quantity, location, and expiration date? Warehouse Management System (WMS) Example of functionality How much does a warehouse management system cost? How to choose the right WMS?",
+    "h3": "Inventory management and accurate record-keeping Planning and organization Optimization of storage Work management Analysis and reporting Integration with other systems Input and output from the warehouse management system (WMS), and subsequently the warehouse. Receipt of goods and their storage Product placement within the warehouse Product picking Warehouse operations Define your requirements Research integration options and their availability. Set a budget Explore the market Request a demo Consider integration with your ERP Consider support and service Ideal WMS?",
+    "h4": "Tracking items Tracking pallets",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/app/workforce-management",
+    "title": "Dynamic Workforce management | Uni LMS module",
+    "h1": "Dynamic Workforce management",
+    "h2": "The workload of shift workers in the warehouse. Do you know what it's like? Warehouse worker job responsibilities It's all based on data Benefits of the workforce management module Where is the data available?",
+    "h3": "What does the module address? How does it work? Any questions?",
+    "h4": "Overview of Employee Work Automatic Work Assignment Guiding Employees Through the Picking Process Preventing Errors",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/business-ideas",
+    "title": "Business Ideas | Where we see opportunities?",
+    "h1": "Where do we see opportunities for new products?",
+    "h2": "VR app for presenting and selling holidays and experiences Hashed contracts Ticket / Booking / Licence platform Calculation of sunlight with 3D visualization",
+    "h3": "Idea Purpose Description: Problem description: Possible solution: Note: Problem description Example Solution proposal Example: Advantage for all parties: Possibility of further expansion: Problems to solve: Technology in the background Goal",
+    "h4": "Note",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/cloudflare",
+    "title": "Cloudflare Wiki",
+    "h1": "Cloudflare Wiki",
+    "h2": "Account API Tokens Deploy through a token CloudFlare R2 Object Storage database",
+    "h3": "APi token Commands for R2 from cli What next? Anything unclear?",
+    "h4": "Copy files to R2 Remove files from R2",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/cloudflare/express",
+    "title": "ExpressJS on Cloudflare",
+    "h1": "ExpressJS on Cloudflare",
+    "h2": "Creating ExpressJS Application for Cloudflare Worker Binding storages Express With Handlebars",
+    "h3": "Create basic Cloudflare Worker Project Install Express and dependencies Initialize Express Application page Test ExpressJS applocation Deploy / Redeploy ExpressJS application on Cloudflare Anything unclear?",
+    "h4": "",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/company",
+    "title": "About Vrealmatic.com - virtual simulation specialists",
+    "h1": "About Us,passionate innovators,responsible partners.",
+    "h2": "Make the most of the minimum Career We help the developer community We help start-ups We have multi-sectoral overlap and business sense",
+    "h3": "Unreal Components VRapps.cz website SAAS service GameArter.com Unreal Library GameArter PacoGames Svizi Game development Web services Online marketing VRapps",
+    "h4": "",
+    "h5": "",
+    "h6": "Consultant, Vrealmatic"
+  },
+  {
+    "id": "/contact",
+    "title": "Contact | Vrealmatic.com",
+    "h1": "Contact",
+    "h2": "",
+    "h3": "",
+    "h4": "",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/dynamic-simulation",
+    "title": "We can help you analyse the implications of changes before you make them. We create digital-twin 3D models working with real data. We uncover flaws, tweak ...",
+    "h1": "Virtual simulations for production optimization.",
+    "h2": "Benefits of dynamic simulation What do you work with in dynamic simulations? What do you need to know to create a dynamic simulation that provides valid results? How is the dynamic simulation created? What software do you use for the simulations? Publications Data-driven decision making",
+    "h3": "Uncovering bottlenecks Identifying the effects of product changes Verification and design of new systems Shift planning tool Simulation of critical scenarios Optimisation of production technologies Workspace Data inputs Simplified visuals Relative time Process qualification Needs and requirements Demonstration of work in Flexsim software (in Czech language)",
+    "h4": "FlexSim MySql Express JS Warehouse Optimization",
+    "h5": "Associated simulations Other services",
+    "h6": "Consultant, Vrealmatic"
+  },
+  {
+    "id": "/gdpr",
+    "title": "GDPR",
+    "h1": "Privacy Policy",
+    "h2": "Who collects your data, what data, and for what purpose? Where is the data processed and how is it secured? How long do we retain your data? Cookies Your rights",
+    "h3": "",
+    "h4": "",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/home-assistant/remote-access",
+    "title": "Affordable remote access to Home Assistant",
+    "h1": "Simple Remote Access to Home Assistant Without Paying for Home Assistant Cloud or Other Costly Solutions",
+    "h2": "Issues with Common Remote Access Methods Open-Source Proxy for Home Assistant",
+    "h3": "How Does Proxy Access Work? Benefits of Proxy Access Anything unclear?",
+    "h4": "",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/knowledge-base",
+    "title": "Vrealmatic Knowledge Base",
+    "h1": "Knowledge base",
+    "h2": "Explore by topic AI Integration for Business Workflows | Vrealmatic Cloudflare Wiki Configuration and Launch of a simple TypeScript app Products by Vrealmatic.com Technology for virtual production and simulation Web3 Stack, technology and applications What are the development trends?Follow the innovations!",
+    "h3": "LLMO, AIO, GEO, AEO: AI Optimization for Search | Vrealmatic AI Assistant for Human Work | Personal AI Assistants for Employees AI Automation: Process First, AI Second AI Cost Optimization: Use the Right Model, Tool, and Workflow Before You Start with AI: Value, Risk, and Safe Use Dedicated AI Automation Server ExpressJS on Cloudflare NextJS on Cloudflare Wiki Monorepo in TypeScript introduction About code scanner mobile app | Scan barcodes with the phone CapacityCheck - Planning with regard to maximum utilization Real-time overview & management for a warehouse | Uni WMS module Dynamic Workforce management | Uni LMS module Mikrotik Router Wiki - Guides for RouterOS Unreal Engine Wiki Configuration and Launch of a simple TypeScript app Libraries for Web3 WalletConnect Introduction",
+    "h4": "",
+    "h5": "",
+    "h6": "Consultant, Vrealmatic"
+  },
+  {
+    "id": "/manufacture",
+    "title": "Optimization and design of efficient manufacture based on virtual simulation",
+    "h1": "We will help you design, manage and optimize the most efficient production line and processes.",
+    "h2": "Greater efficiency and better decision-making How is production optimisation performed? The principle of creating a production flow model",
+    "h3": "Creating a parametric model Simulation of operational functioning of workplaces Evaluation and comparison of sub-parameters of individual variations Incorporating functional changes into production We're ready to assist you",
+    "h4": "",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/mikrotik-router",
+    "title": "Mikrotik Router Wiki - Guides for RouterOS",
+    "h1": "Mikrotik Router Wiki",
+    "h2": "",
+    "h3": "Guides",
+    "h4": "",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/mikrotik-router/backup",
+    "title": "Backing Up RouterOS and Restoring from Backup",
+    "h1": "Backing Up RouterOS and Restoring from Backup on Mikrotik router",
+    "h2": "How to Create a Backup of the Current RouterOS Configuration How to Restore RouterOS Settings from a Backup",
+    "h3": "Anything unclear?",
+    "h4": "",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/mikrotik-router/factory-reset",
+    "title": "Factory reset on Mikrotik router (RouterOS)",
+    "h1": "Factory reset on Mikrotik router",
+    "h2": "Reset Button",
+    "h3": "Configuration Reset to Factory settings Switching to CAPS Mode Switching to Netinstall Boot Mode Connecting to the Router Setting Up WiFi Anything unclear?",
+    "h4": "",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/mikrotik-router/firewall",
+    "title": "Firewall configuration on MikroTik router",
+    "h1": "Firewall settings on Mikrotik Router",
+    "h2": "What is the purpose of a Firewall on a router?",
+    "h3": "Main Functions of a Firewall Anything unclear?",
+    "h4": "Network Security Traffic Control and Management Monitoring and Logging Network Segmentation and Isolation Bandwidth Limitation VPN and Remote Access",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/mikrotik-router/firewall/filter-rules",
+    "title": "Filter Rules Firewall configuration on MikroTik router",
+    "h1": "Filter Rules Firewall configuration on Mikrotik Router",
+    "h2": "The Essence of Filter Rules Function Explanation of Predefined Rules Filter Rules Parameters and Actions: The Importance of Rule Ordering",
+    "h3": "Through firewall rules, you specify: Overview of Set Rules on the Router Additional Rules Column Descriptions / Parameter Purposes Filter Actions Tips for Choosing the Order of Rules Changing the Order of Rules Setting Up Firewall for Remote Access Example of Blocking All Incoming Access to router services from Outside, Except for VPN Access: Anything unclear?",
+    "h4": "",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/mikrotik-router/firewall/nat",
+    "title": "RouterOS NAT configuration on MikroTik router",
+    "h1": "NAT configuration on Mikrotik Router",
+    "h2": "What is NAT? Where can I find NAT rules in RouterOS? Importance of the Order of NAT Rules Managing IP Addresses at the Port Level Setting up Port Forwarding for Remote Access to Each Device Behind the Router",
+    "h3": "What are the main purposes of NAT? Adding a NAT rule in RouterOS Overview of NAT actions Setting up DstNAT Setting up SrcNAT Anything unclear?",
+    "h4": "",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/mikrotik-router/first-connection",
+    "title": "First Connection do Mikrotik router / RouterOS administration",
+    "h1": "First Connection to Mikrotik router / RouterOS administration",
+    "h2": "URL Address WinBox Tool",
+    "h3": "Connection Steps: Anything unclear?",
+    "h4": "",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/mikrotik-router/quick-set",
+    "title": "Quick Set RouterOS window on MikroTik router",
+    "h1": "Quick Set RouterOS window on MikroTik router",
+    "h2": "Router vs Bridge Mode Internet Section Local Network Settings VPN Settings System Section Settings Wireless (Wifi / Wireless) Section Settings",
+    "h3": "Router Mode Bridge Mode Choice of Address Acquisition Mode Static Automatic PPPoE (Point-to-Point Protocol over Ethernet) MAC Address Function Anything unclear?",
+    "h4": "",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/mikrotik-router/remote-access",
+    "title": "Remote Access to RouterOS and devices behind the router",
+    "h1": "Remote Access to RouterOS (MikroTik router) and devices behind the router",
+    "h2": "The Most Common Connection Options to RouterOS Methods of Remote Access to Router OS Remote Access to RouterOS from a Public IP Remote Access to RouterOS via VPN Setting up VPN on the Client Device Remote Connection to the Internal Network DNS Alias for Public IP",
+    "h3": "Enabling Services for Router Access Allowing Internet Access to Service Ports Remote Connection to the Router via Public IP Activating a Pre-configured VPN Service MikroTik Cloud in RouterOS Configuring VPN (L2TP server) in RouterOS IPSec Configuration PPP Setting up Firewall Adding a New VPN on MacOS Configuring the VPN Connecting to the VPN Procedure for Accessing Devices Behind the Remote Router Anything unclear?",
+    "h4": "Setting up the L2TP Server PPP profile PPP user IP SEC rules Allowing L2TP and IPSec (IKE + ESP) Traffic in Firewall Rules Allowing NAT for VPN Devices",
+    "h5": "Allowing IKE (Internet Key Exchange) traffic: Allowing NAT (NAT Traversal) traffic: Allowing L2TP traffic: Allowing ESP (Encapsulating Security Payload) traffic: MASQUERADE for VPN Clients",
+    "h6": ""
+  },
+  {
+    "id": "/mikrotik-router/security",
+    "title": "Securing RouterOS (Mikrotik Router)",
+    "h1": "Securing RouterOS (Mikrotik Router)",
+    "h2": "Security Risks Associated with Routers Measures to Prevent Security Risks in Mikrotik RouterOS Routers",
+    "h3": "Protection Against Unauthorized Access Up-to-date Firmware Wifi Security Secure Protocols Setting Router Services Setting the Correct Mode Network Segmentation Setting Firewall Logging and Monitoring Physical Access Restrictions Anything unclear?",
+    "h4": "",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/mikrotik-router/services",
+    "title": "RouterOS services on Mikrotik router",
+    "h1": "RouterOS services on Mikrotik router",
+    "h2": "Overview of Services Running on a Mikrotik Router Console Commands: Certificates for Router Services",
+    "h3": "Service Parameters: Description of Services: api / api-ssl ftp ssh telnet winbox www www-ssl Generating a Certificate in RouterOS Signing the Certificate Assigning the Certificate to a Service Anything unclear?",
+    "h4": "",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/mikrotik-router/vpn",
+    "title": "VPN configuration on MikroTik router (WireGuard)",
+    "h1": "VPN configuration on Mikrotik router",
+    "h2": "What is VPN and What is it Used For? Why Have VPN at the Router Level (Router-Level VPN)? VPN and Its Impact on Internet Speed Configuration and Activation of VPN on MikroTik Router",
+    "h3": "The main benefits of using VPN are: RouterOS Update Safe Mode VPN Function Activation in Configuration WireGuard Configuration Wireguard Section Settings - Wireguard Tab Wireguard Section Settings - Peers Tab Adding Wireguard Interface IP Address to the Router Assigning DNS Server Routing NAT Rule Configuration in Firewall Test Your IP Deactivating the VPN Deactivating Safe Mode Anything unclear?",
+    "h4": "Configuration Details for Connecting to the VPN Server Fill in the following: Routing Dst. Address → VPN server Gateway Routing Peer VPN endpoint → Router Dst Address (optional)",
+    "h5": "Default Route",
+    "h6": ""
+  },
+  {
+    "id": "/nextjs/cloudflare",
+    "title": "NextJS on Cloudflare Wiki",
+    "h1": "NextJS on Cloudflare Wiki",
+    "h2": "3 Options Static NextJs build on Cloudflare worker OpenNext worker Upgrading to latest version Combination of Static Build + Open Worker on background Integration R2 Storage Database to NextJS application Incremental cache for NextJS on Cloudflare",
+    "h3": "Develop, build, deploy Preview: Build static output Deploy: Deploy / Redeploy (from Ubuntu WSL on Windows) Check real-time logs on deployed ver through wrangler Creating D1 database and connecting it Config wrangler.jsonc Sample R2 Library src/lib/r2.ts Use Sample for saving cache data to R2 Anything unclear?",
+    "h4": "D1 Typing Connect DB",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/nodejs/typescript-intro",
+    "title": "Introduction to Typescript with Express.js",
+    "h1": "Introduction to Typescript",
+    "h2": "Installing basic repositories Project's configuration Writing a sample application Running the application for development Compiling the application for production",
+    "h3": "Anything unclear?",
+    "h4": "",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/products",
+    "title": "Products by Vrealmatic.com",
+    "h1": "Components and Modules for Unreal Engine",
+    "h2": "Products by focus Modulární řešení",
+    "h3": "",
+    "h4": "",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/services",
+    "title": "Our services | What can we help you with at Vrealmatic?",
+    "h1": "Build with confidence.Deploy with evidence.",
+    "h2": "Our services Virtual simulation Virtual prototyping Applications for immersive technologies Tailored tools and solutions Artificial Intelligence Web Development & Digital Platforms Are you solving a problem that no one can handle?",
+    "h3": "AI integration AI assistance Automation servers AI operations security Let's work together to innovate in your field",
+    "h4": "",
+    "h5": "",
+    "h6": "Consultant, Czechia"
+  },
+  {
+    "id": "/services/ar-for-printed-matter",
+    "title": "Augmented reality as a digital extension of printed manner",
+    "h1": "Augmented reality with multimedia content as a complement and extension of printed materials.",
+    "h2": "How does the digital (AR) layer work for physical prints? A simple demonstration is worth a thousand words Interested inaugmented reality for print publications?",
+    "h3": "1) Scan the QR code on your smartphone (via the camera app or QR reader) 2) After scanning the QR code, with the app open, point to the images in the book below",
+    "h4": "",
+    "h5": "",
+    "h6": "Consultant, Olomouc, CzechiaR"
+  },
+  {
+    "id": "/simulation",
+    "title": "Virtual simulations for production optimization",
+    "h1": "Simulation for industry and supply chain management",
+    "h2": "",
+    "h3": "Dynamic simulation Manufacturing Warehousing Prototyping",
+    "h4": "",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/simulation/virtual-prototyping",
+    "title": "Virtual prototyping of machines and mechanisms",
+    "h1": "We will help you verify the functionality of your prototypes quickly and efficiently in virtual reality.",
+    "h2": "What is virtual prototyping for? Real physics in a digital world",
+    "h3": "Publication: Virtual Prototyping We're ready to assist you",
+    "h4": "",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/smart-home/home-assistant/access",
+    "title": "Access to Home Assistant – locally and remotely",
+    "h1": "Access to Home Assistant – locally and remotely",
+    "h2": "From browser or mobile app",
+    "h3": "Local access Remote access Remote notifications Anything unclear?",
+    "h4": "Steps to enable remote access via Cloudflare:",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/technology",
+    "title": "Technology for virtual production and simulation",
+    "h1": "Real-time adaptable technology for virtual simulations",
+    "h2": "The principle of operation of virtual simulations Key aspects of simulations in virtual space Benefits of running virtual simulations",
+    "h3": "API inputs User inputs Data and input processing module 3D Virtual space Processing Engine Physics engine Output Virtual reality Real-time processing Open environment Mathematical verification Improved productivity Financial efficiency Easy scalability Opening new opportunities Usability consultation",
+    "h4": "",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/typescript",
+    "title": "Configuration and Launch of a simple TypeScript app",
+    "h1": "Typescript Introduction",
+    "h2": "Advantages of TypeScript over JavaScript on the server - Why use TypeScript? Creating First Express TypeScript app Other sources Async-operation promises",
+    "h3": "Static type checking → Fewer runtime errors Better work with APIs and databases (e.g. Prisma, MongoDB, PostgreSQL) Better support for VS Code & IntelliSense Anything unclear?",
+    "h4": "JavaScript TypeScirpt",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/typescript/monorepo",
+    "title": "Monorepo in TypeScript introduction",
+    "h1": "Monorepo for TypeScript introduction",
+    "h2": "How does monorepo work with Next.js and React Native? Create a monorepo using TurboRepo with Next.js and React Native Security when using Monorepo",
+    "h3": "Advantages of this architecture Generate a project structure Build all apps and packages Start the application Security aspects of monorepos: Security considerations for web/mobile app case: Alternatives if security is a top concern: Anything unclear?",
+    "h4": "",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/typescript/nextjs",
+    "title": "TypeScript with Next.js",
+    "h1": "TypeScript with NextJS introduction",
+    "h2": "Key Next.js Concepts Creating Next.js app NextJS on Cloudflare Workers Next.js vs. Express.js? Optimized React Workflow for updating Frontend Data Performance Optimization Guides",
+    "h3": "Installation File-based Routing Dynamic Routing API Routes Fetch Data on the Server (SSR) Client vs. Server Components Middleware Deployment When to Use Next.js Over Express? Creating a Functional Component Using Props for Dynamic Content Using State with useState Fetching Data with useEffect Handling Forms Lifting State Up Global State with Context API Conditional Rendering List Rendering with map() Why Use This Workflow? Anything unclear?",
+    "h4": "Create a Basic Page",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/typescript/nextjs/deploy",
+    "title": "Deploy Next.js to cloud Vercel / Azure",
+    "h1": "Deploy NextJS to cloud infrastructure",
+    "h2": "Deploy",
+    "h3": "First deploy Re-deploy Anything unclear?",
+    "h4": "",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/ubuntu-server/2fa-google-authenticator",
+    "title": "Activating Google Authenticator 2FA on Ubuntu Server",
+    "h1": "Two-Factor Authentication (2FA) via Google Authenticator on Ubuntu Server",
+    "h2": "Procedure for Adding and Activating 2FA via Google Authenticator on Ubuntu Server",
+    "h3": "Anything unclear?",
+    "h4": "",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/ubuntu-server/fail2ban",
+    "title": "Install and manage Fail2Ban DDoS protection on Ubuntu Server",
+    "h1": "Fail2Ban on Ubuntu Server",
+    "h2": "Install, configurate & manage Fail2Ban",
+    "h3": "Check fail2ban state Unban IP Anything unclear?",
+    "h4": "",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/ubuntu-server/git",
+    "title": "Downloading repositories from github | Ubuntu Server",
+    "h1": "Using Git on Ubuntu Server",
+    "h2": "How to use git on Ubuntu Server Connect to certain Git origin and push first commit",
+    "h3": "Anything unclear?",
+    "h4": "",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/ubuntu-server/mullvad-vpn",
+    "title": "Mullvad VPN on Ubuntu Server - Installation Guide",
+    "h1": "Mullvad VPN on Ubuntu Server",
+    "h2": "Installation and Setup of Mullvad VPN in 10 Steps VPN Split Tunnel Automatic Time Synchronization Check and Split Tunnel Setup for Mullvad VPN When Time is Not Synchronized Removing Mullvad VPN from Ubuntu",
+    "h3": "VPN Split Tunnel for NTP service systemd-timesyncd Anything unclear?",
+    "h4": "Check timedatectl Status Check systemd-timesyncd Service Status Test Access to NTP Server IP Setting Up Split Tunnel for VPN When NTP Server Can't Be Pinged",
+    "h5": "Additional Useful Commands:",
+    "h6": ""
+  },
+  {
+    "id": "/ubuntu-server/nodejs",
+    "title": "Install and manage Node.js on Ubuntu Server",
+    "h1": "Node.js on Ubuntu Server",
+    "h2": "How to Install Node.js on Ubuntu? Installing Node.js with Apt from the Default Repositories Installing Node Using the Node Version Manager (Recommended) Installing next versions Switching to selected node version Set default Node.js version Uninstalling useless versions",
+    "h3": "Installing NodeJS under system account Upgrading / Downgrading NodeJS under system account Managing building packages tools Useful commands Anything unclear?",
+    "h4": "",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/ubuntu-server/proton-vpn",
+    "title": "Proton VPN on Ubuntu Server - Installation Guide",
+    "h1": "Proton VPN on Ubuntu Server",
+    "h2": "Installation and Basic Setup of Proton VPN",
+    "h3": "Manual Configuration of Proton VPN on Ubuntu Desktop/Server Using WireGuard Anything unclear?",
+    "h4": "Installing the WireGuard Client Obtaining Proton VPN Configuration for WireGuard Placing Proton VPN Server Configurations in the System Allowing PC Access from the Local Network Connecting to the VPN Server Disconnecting from the VPN Server Enabling/Disabling VPN Connection on System Startup",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/ubuntu-server/ssh-keys",
+    "title": "Generation, Activation, and Usage of SSH Keys | Ubuntu Server",
+    "h1": "Complete guide for Generating, Activating, and Using SSH Keys for SSH Access to Ubuntu Server",
+    "h2": "Generating ed25519 SSH Keys Finding the Public Key Remotely Log into the Server Using Username and Password Uploading the Public Key to the Server Remote Login to the Server Using a Private SSH Key SSHD configuration Check authentication log",
+    "h3": "Anything unclear?",
+    "h4": "",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/ubuntu-server/time-synchronization",
+    "title": "Time Synchronization options & troubleshooting on Ubuntu",
+    "h1": "Time Synchronization options & troubleshooting on Ubuntu Server",
+    "h2": "Checking System Time Status Default Time Synchronization (systemd-timesyncd) Alternative Time Synchronization with Chrony",
+    "h3": "Why UDP 123 May Be Blocked? Troubleshooting Time Synchronization issues when using systemd-timesyncd Switching from systemd-timesyncd to Chrony Reverting back to systemd-timesyncd Anything unclear?",
+    "h4": "Stop, disable, and remove systemd-timesyncd Install Chrony Adjust Chrony configuration Verify and fix chronyd binary capabilities Enable and start Chrony Monitor synchronization status",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/ubuntu-server/unattended-upgrades",
+    "title": "Unattended Upgrades on Ubuntu Server",
+    "h1": "Unattended Upgrades on Ubuntu Server",
+    "h2": "Install unattended-upgrades library Configurate unattended-upgrades service Setting up automatic boot Process the changes by restarting teh service Check the service with a forced start",
+    "h3": "Anything unclear?",
+    "h4": "",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/ubuntu/wsl",
+    "title": "WSL2 Ubuntu on Windows | Installation, Security and AI Development",
+    "h1": "WSL2 Ubuntu on Windows",
+    "h2": "What is WSL2 and Why Use It? Installing WSL2 Ubuntu Recommended Project Location Accessing WSL Files from Windows Using WSL2 with AI Coding Agents Practical Summary",
+    "h3": "Main benefits Recommended Avoid for typical WSL development Why separation matters Recommended principle The most effective improvement for most developers Use separate Windows accounts A practical recommendation Start with a fresh Ubuntu installation Understand the limits of WSL Need help with a secure development setup?",
+    "h4": "",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/unreal-components-library",
+    "title": "Unreal Components Library | Ready to use parametric assets",
+    "h1": "Vrealmatic components for Unreal Engine",
+    "h2": "How to load Vrealmatic components into Unreal Engine 4 and 5? How to export generated 3D models into any 3D modeling software? Vrealmatic Unreal components library Why we do it?",
+    "h3": "Mesh repeater Parametric window generator Simple GUI Request custom component VR application guide SAAS service for game developers VR ArchViz Startup",
+    "h4": "",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/unreal-components-library/parametric-window",
+    "title": "Parametric Window Generator | Generate window for your dimensions",
+    "h1": "Parametric Window Generator",
+    "h2": "About the component",
+    "h3": "Request custom component",
+    "h4": "",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/unreal-components-library/simple-gui",
+    "title": "Simple GUI For Unreal Engine",
+    "h1": "Simple GUI",
+    "h2": "About the component Documentation",
+    "h3": "UI Components: Installation: Package sources: Placing Widget into the scene: Creating UI widgets Creating logic of UI widgets Simple GUI components modification Request custom component",
+    "h4": "SimpleGUI/Actors Reusable package buttons (SimpleGUI/UMG/Reuse) and their options:",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/unreal-components-library/static-mesh-repeater",
+    "title": "Static Mesh Repeater | Repeat any mesh | Unreal Component",
+    "h1": "Static Mesh Repeater",
+    "h2": "About the component",
+    "h3": "Request custom component",
+    "h4": "",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/unreal-engine",
+    "title": "Unreal Engine Wiki",
+    "h1": "Unreal Engine Wiki",
+    "h2": "We can build anything for you in Unreal Engine.",
+    "h3": "General By Topic Guides for clients",
+    "h4": "Other resources",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/unreal-engine/animtotexture",
+    "title": "AnimToTexture in Unreal Engine",
+    "h1": "AnimToTexture in Unreal Engine",
+    "h2": "The purpose of AnimToTexture plugin AnimToTexture helpers plugin Anim To Texture DataAsset Controlling AnimToTexture animations in runtime Notes",
+    "h3": "What does AnimTotexture plugin do? Enabling AnimTotexture plugin Schema Anything unclear?",
+    "h4": "AnimTotexture plugin content AnimToTexture VAT definition MaterialLayer controlling animation Switching between animations in runtime",
+    "h5": "Vertex Animation Bone Animation",
+    "h6": ""
+  },
+  {
+    "id": "/unreal-engine/assets",
+    "title": "Working with assets in Unreal Engine",
+    "h1": "Workind with Assets in Unreal Engine",
+    "h2": "Check if a file exists on a disk Open and Close Assets With C++ (Editor only)",
+    "h3": "Open an editor window for the desired Asset Close the editor window that is open for the desired Asset Get all the assets that have an editor window open for them Anything unclear?",
+    "h4": "",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/unreal-engine/blueprint",
+    "title": "Working with Blueprint (BP) in Unreal Engine",
+    "h1": "Working with Blueprint (BP) in Unreal Engine",
+    "h2": "Create Blueprint Asset in C++ Compile Blueprint asset with C++ Spawn Actor to any Blueprint",
+    "h3": "Add a component node to a blueprint asset (Help function) Add a scene component to a blueprint asset Add a point light component to a blueprint asset Add a camera component to a blueprint asset Anything unclear?",
+    "h4": "",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/unreal-engine/characters",
+    "title": "Characters in Unreal Engine",
+    "h1": "Characters in Unreal Engine",
+    "h2": "Characters creation in Unreal Engine",
+    "h3": "Anything unclear?",
+    "h4": "",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/unreal-engine/city-sample/crowd",
+    "title": "Crowds in CitySample Unreal Engine project",
+    "h1": "Processing of Crowds is City Sample project",
+    "h2": "Sample Video Crowd Assets Two Types of Humans Building characters LODs management Animating Crowd Humans Mass Traits Fragments Assorted fragments Other fragments UCitySampleCrowdVisualizationFragmentInitializer CrowdCharacterActor.cpp UMassCrowdUpdateISMVertexAnimationProcessor MassCrowdAnimationProcessor Look at Animation Walking / Standing",
+    "h3": "Assets list Crowd Characters Crowd Members Character's visual definition - parts the character is being assembled from: Character Meshes Character Materials & Textures Filing FCrowdCharacterDefinition with data from UCrowdCharacterDataAsset UCitySampleCrowdVisualizationFragmentInitializer Mass Observer Processor Building Character Members on Spawn based on FCrowdCharacterDefinition UMassProcessor_CrowdVisualizationCustomData Mass Processor Animating Human Actors Source Files structure - Files list and purpose Used Crowd character inheritance MassCrowdAgentConfig_Metahuman Data Asset file MassCrowdAgentConfig Data Asset file UMassMovementTrait FCitySampleCrowdVisualizationFragment FCrowdAnimationFragment UMassFragmentInitializer_Animation (UMassObserverProcessor) UMassProcessor_Animation (UMassProcessor) Anything unclear?",
+    "h4": "Character Class Inheritance Project Files (Source/CitySample) Plugins FMassMontageFragment",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/unreal-engine/classes",
+    "title": "Parent Classes in Unreal Engine - Choosing a C++/BP Parent Class",
+    "h1": "Choosing a C++/BP Parent Class in Unreal Engine",
+    "h2": "C++/Blueprint Parent Classes in Unreal Engine Inheritance Class Hierarchy Selecting the right Class for the requiired purpose Most used classes Other interesting classes",
+    "h3": "Virtual / Override functions architecture None AActor APawn ACharacter AGameModeBase AGameMode APlayerController AAIController UUserWidget UBlueprintFunctionLibrary UGameplayStatics ActorComponent FTimerManager Animation Blueprints Anything unclear?",
+    "h4": "Access GameMode functions from any class Pointer Focus management",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/unreal-engine/classes/aactor",
+    "title": "AActor class in Unreal Engine - Examples",
+    "h1": "AActor class in Unreal Engine",
+    "h2": "Inheritance Hierarchy Spawn an Actor into the Scene (Level) Get All Actors Of Class Examples Iterating over all Actors in a given level On Hit trigger Merge Actors With C++ Lock / unlock actor transform",
+    "h3": "Spawn an Actor (and any its inherited class) to the world in runtime Spawn an Actor (and any its inherited class) to the world in editor Relative path to assets: Get the names of all actors in the current editor world Get the Mesh names of all static mesh actors in the current editor world Iterating over all AI characters to check whether there is still any alive. If not, end the game with Winner state.. General Actor Iterator Anything unclear?",
+    "h4": "Attach an actor into another actor",
+    "h5": "Attaching to Meshes via Sockets",
+    "h6": ""
+  },
+  {
+    "id": "/unreal-engine/classes/aaicontroller",
+    "title": "AAIcontroller Class in Unreal Engine - Examples",
+    "h1": "AAIController class in Unreal Engine",
+    "h2": "Inheritance Hierarchy",
+    "h3": "BTT services Anything unclear?",
+    "h4": "",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/unreal-engine/classes/ftimermanager",
+    "title": "FTimerManager class in Unreal Engine - Examples",
+    "h1": "FTimerManager class in Unreal Engine",
+    "h2": "Set time interval",
+    "h3": "Anything unclear?",
+    "h4": "Timer with a callback function and input parameter",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/unreal-engine/classes/ublueprintfunctionlibrary",
+    "title": "UBlueprintFunctionLibrary class in Unreal Engine - Examples",
+    "h1": "UBlueprintFunctionLibrary class in Unreal Engine",
+    "h2": "Creating assets with C++ & UBlueprintFunctionLibrary",
+    "h3": "Creating various kind of assets Anything unclear?",
+    "h4": "World asset Material asset LevelSequence asset NiagaraSystem asset SoundCue asset Enum asset Struct asset",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/unreal-engine/classes/ugameplaystatics",
+    "title": "UGameplayStatics Class in Unreal Engine - Examples",
+    "h1": "UGameplayStatics class in Unreal Engine",
+    "h2": "Inheritance Hierarchy Get all Actors of Class Apply Damage Spawn UGameplayStatics item Play Sound Get All Actors Of Class Examples",
+    "h3": "Spawn particle effect Spawn Sound into a socket pointer Get the names of all actors in the current editor world Get the Mesh names of all static mesh actors in the current editor world Anything unclear?",
+    "h4": "SpawnEmitterAtLocation SpawnEmitterAttached - Spawn into a socket pointer",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/unreal-engine/classes/uobject",
+    "title": "UObject class in Unreal Engine - Examples",
+    "h1": "UObject class in Unreal Engine",
+    "h2": "Inheritance Hierarchy Iterating over UObjects Get Asset based of Class",
+    "h3": "Get the names of all objects Anything unclear?",
+    "h4": "",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/unreal-engine/classes/uuserwidget",
+    "title": "UUserWidget class in Unreal Engine - Examples",
+    "h1": "UUserWidget class in Unreal Engine",
+    "h2": "Inheritance Hierarchy Blueprint UserWidget Graph nodes Adding Widgets support to C++ Builds Adding a Blueprint Widget into the viewport Make C++ variable accessible from the Bluepring Widget",
+    "h3": "Option 1: In Blueprint Option 2: In C++ code Anything unclear?",
+    "h4": "Removing userWidget from Viewport",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/unreal-engine/components",
+    "title": "Components in Unreal Engine - Choosing the right Component",
+    "h1": "Components in Unreal Engine",
+    "h2": "Components in Unreal Engine Working with Components in C++ List of selected components and their properties",
+    "h3": "Constructing components Setting the component as the Root component Attaching the component into another component Getting components RootComponent USceneComponent UPrimitiveComponent UStaticMeshComponent UCapsuleComponent UCameraComponent UInputComponent Anything unclear?",
+    "h4": "",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/unreal-engine/crowds",
+    "title": "X ways to achieve well performing crowds in Unreal Engine 5",
+    "h1": "Ways to achieve well performing crowds of people (or any moving skeletal character) in Unreal Engine",
+    "h2": "Abstract Custom solution using standard Unreal tools and Skeletal Animations (Hierarhical) Instanced Static Mesh + Vertex Animations Mass Framework",
+    "h3": "Testing environment Anything unclear?",
+    "h4": "",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/unreal-engine/data",
+    "title": "Working with Data files in Unreal Engine",
+    "h1": "Working with Data in Unreal Engine",
+    "h2": "SaveGame util GameInstance util Check if a file exists on a disk Text files Json files Data Tables",
+    "h3": "Read content of any file from disk (Editor based) Write content to a file on disk Reading a json file from a disk and writing it on the disk Conversion of FString JsonString from and to FJsonObject Holding data in UStruct Convert FJsonObject to UStruct Convert UStruct to FJsonObject Json Conclusion Data Table Properties Composite Data Tables Creating Data Table Structure Inserting Data into Unreal Engine Working with Data Table(s) in Unreal Engine with C++ (Editor Based) Data Table Json (Unreal specific) file Get Data Table from disk Reading values from Data Table Anything unclear?",
+    "h4": "Load to text array Deserialize FString to FJsonObject Serialize FJsonObject to FString Loading Json file to UStruct Saving UStruct to Json file Example of Usage: In C++ In Blueprint By Creation By Import Import Data Table into Unreal Engine Export Data table from Unreal Engine Read a series of struct based on a json file formatted like a data table Write a series of struct to a json file formated like a data table",
+    "h5": "Extend .csv rows for row id Transform .csv row to Data Structure",
+    "h6": ""
+  },
+  {
+    "id": "/unreal-engine/datasmith",
+    "title": "Datasmith for Converting Models to Unreal Engine",
+    "h1": "Converting Models to Unreal Engine with Datasmith",
+    "h2": "Supported Software - Click to Jump to Specific Software Procedure for Individual Software Import into Unreal Engine",
+    "h3": "Autodesk Inventor Autodesk 3ds Max / Design Autodesk Revit Autodesk VRED Autodesk Navisworks Autodesk AutoCad Autodesk Alias SketchUp Rhino3D DS SolidWorks DS CATIA DS DELTAGEN Cinema 4D Creo Siemens NX (Unigraphics) Siemens Solid Edge FORM•Z (Pro / jr / Student) Allplan Modo Graphisoft Archicad IFC iTwin Platform Common Database (CDB) standard OpenFlight format CET (Configura) Additional Supported Import Formats Enabling Plugins in Unreal Engine Importing a Model via Datasmith Anything unclear?",
+    "h4": "CATIA V4 CATIA 3D XML Overview of Datasmith Plugins in Unreal Engine",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/unreal-engine/debugging/logging",
+    "title": "(Debug) Logging in Unreal Engine",
+    "h1": "UE_LOG in Unreal Engine",
+    "h2": "UE_LOG UE_LOG Properties UE_LOGFMT",
+    "h3": "LOG_CATEGORY Declare custom category ELogVerbosity TEXT_INFORMATION Anything unclear?",
+    "h4": "Declaration in header file Definition in cpp file Logging from anywhere in the code",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/unreal-engine/desktop-platform",
+    "title": "Working with DesktopPlatform module features in Unreal Engine",
+    "h1": "Working with DesktopPlatform in Unreal Engine",
+    "h2": "IDesktopPlatform",
+    "h3": "Open Explorer for browsing files on PC drive and return path of selected file Anything unclear?",
+    "h4": "",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/unreal-engine/events",
+    "title": "Events in Unreal Engine",
+    "h1": "Events in Unreal Engine",
+    "h2": "Event Dispatcher",
+    "h3": "Anything unclear?",
+    "h4": "",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/unreal-engine/forward-declaration",
+    "title": "Forward Declaration in Unreal Engine",
+    "h1": "Forward Declaration in C++ Unreal Engine code",
+    "h2": "Forward Declaration in C++ (Unreal Engine)",
+    "h3": ".h header file does not need to know the implementation details of specified class Remember when defining a C++ code: Anything unclear?",
+    "h4": "",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/unreal-engine/heatmaps",
+    "title": "Heatmaps in Unreal Engine",
+    "h1": "Heatmaps in Unreal Engine",
+    "h2": "What is a heatmap? Does Unreal Engine have built-in heatmaps? Common use cases Data sources Implementation options Choosing a spatial model Metrics Time and aggregation Visual design Example integration: NavMesh-based movement heatmap Debugging and validation",
+    "h3": "Material or texture overlay Decals Niagara Procedural mesh overlay External analysis with Unreal playback Possible asset structure Runtime visualization Need heatmap analytics in Unreal Engine?",
+    "h4": "",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/unreal-engine/import-assets",
+    "title": "Importing assets to Unreal Engine",
+    "h1": "Importing assets to Unreal Engine",
+    "h2": "Importing Assets with C++ to Unreal Engine Import of basic data types (textures, sounds...) (Editor based) Reimport Asset (Editor based) Get / Set Asset Import Source Path (Editor based) Import Alembic Geometry Cache",
+    "h3": "CreateImportTask custom help function ProcessImportTask custom help function In the similar way, there's possible: Get Asset Import Path Set Asset Import Path Get the Asset Import Data based on the asset class Anything unclear?",
+    "h4": "",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/unreal-engine/level",
+    "title": "Working with Levels in Unreal Engine",
+    "h1": "Working with Levels in Unreal Engine",
+    "h2": "Sublevels Lock / unlock level",
+    "h3": "Add Sublevel To Editor World Remove Sublevel from Editor World Set Sub-Level Settings with C++ Spawn Actors In Sub-Level Move / Copy Actors Between Sub-Level Anything unclear?",
+    "h4": "Get Sublevel from world (Help function)",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/unreal-engine/mass",
+    "title": "Mass Framework in Unreal Engine",
+    "h1": "Mass Framework for crowds & traffic simulation in Unreal Engine",
+    "h2": "About Mass Framework Mass Plugins and Modules Meshes / Visuals in Mass Mass Architecture Logic (MassAI plugin) Mass Framework Entity Component System (ECS): Fragment Trait Entity Processors UMassProcessor UMassObserverProcessor Tags Source files structure Mass Character BP class Smart Objects in Mass (MassAI) UWorldSubsystem Spawning entities to the world Mass Spawner (MassGameplay) Spawn Data Generators Destroying entities LODs in Mass FMassEntityView Debugging Mass behaviour More to know Other resources",
+    "h3": "Difference between OOP and ECS Data-Oriented design architecture of Mass framework Mass ECS data scheme Fragment types in Mass (to derive from on creation) Attaching custom Fragment to Mass Selected Built-in Mass Fragments Other code-based operations with fragments Creating a custom Trait Attaching Traits to Mass Default Mass Traits to use Processor Constructor setup Processors Queries configuration Processors Execution Example use - updating location Other examples: Exdamples of use Creating a tag in any file Example of Creating a Mass tag in Trait file and attaching it to the Trait Filtration based on Tag Dynamical adding / Removal tags furing execution Mass Agents Setting Character as Mass agents MassCharacter example MetaHuman Mass example Smart Object Definition File Trait attachment Spawn entities with runtime data Spawning various entities Mass Entity Config Asset EQS SpawnPoints Generator Zone Graph SpawnPoints Generator Custom Written Generator Deferred Directly Anything unclear?",
+    "h4": "Visualization MassCrowd Assorted Fragments MassGameplay Replication MassGameplay State Tree MassAI Crowd Server Representation MassCrowd Look At MassAI CrowdMember MassCrowd ZoneGraph Annotation MassAI SmartObject User MassGameplay SimulationLOD MassGameplay LODCollector MassGameplay Movement MassGameplay ZoneGraph Navigation MassAI Steering MassAI Smooth Orientation MassAI Avoidance MassAI Navigation Obstacle MassAI Debug Visualization MassGameplay Agent Feet Location Sync Agent Movement Sync Processing phases Execution flags Threads settings Access requirements Presence requirements Access Requirement based on Query Conf Notes Updating Radius value in Fragment Updating Color Entity Manager Observer calls Observing multiple Fragment/Tags Example: Muting entities (adding to tag filtration) with Defer() SubsystemExample UBuildyMassBuildingSubsystem Mass Spawners require set a few things to spawn entities: Environment Query",
+    "h5": "Creating a Mass fragment FMassFragment Creating a shared Mass fragment FMassSharedFragment Use cases: Proper instanced Static Mesh components",
+    "h6": ""
+  },
+  {
+    "id": "/unreal-engine/mass/crowd-visualization",
+    "title": "Crowd Visualization Trait in Mass Framework",
+    "h1": "Crowd Visualization trait in Mass Framework",
+    "h2": "Crowd Visualization Trait",
+    "h3": "Setup: Params LODParams Overriding default value Anything unclear?",
+    "h4": "LODMax Count",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/unreal-engine/mass/fmassactorfragment",
+    "title": "What's purpose of FMassActorFragment and how to use that?",
+    "h1": "FMassActorFragment with Mass Framework",
+    "h2": "FMassActorFragment MassGameplay built-in resource",
+    "h3": "Adding FMassActorFragment to MassConfiguration Anything unclear?",
+    "h4": "",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/unreal-engine/mass/lod-collector",
+    "title": "LODCollector Trait in Mass Framework",
+    "h1": "LODCollector in Mass Framework",
+    "h2": "LODCollector with MassGameplay built-in resources",
+    "h3": "LODCollector Trait Anything unclear?",
+    "h4": "",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/unreal-engine/mass/movement",
+    "title": "Movement with Mass Framework in Unreal Engine",
+    "h1": "Movement with Mass Framework",
+    "h2": "Processing Movement with MassGameplay built-in resources",
+    "h3": "Movement Trait Fragments for movement Movement Processor Anything unclear?",
+    "h4": "",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/unreal-engine/mass/simulation-lod",
+    "title": "SimulationLOD Trait in Mass Framework",
+    "h1": "SimulationLOD in Mass Framework",
+    "h2": "SimulationLOD with MassGameplay built-in resources",
+    "h3": "SimulationLOD Trait Anything unclear?",
+    "h4": "",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/unreal-engine/mass/smooth-orientation",
+    "title": "Smooth Orientation of entities in Mass Framework in Unreal Engine",
+    "h1": "Smooth Orientation with Mass Framework",
+    "h2": "Processing Smooth Orientation with MassAI built-in resources",
+    "h3": "Smooth Orientation Trait Fragments for Smooth Orientation Smooth Orientation Processor Anything unclear?",
+    "h4": "Required Fragments",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/unreal-engine/mass/steering",
+    "title": "Steering with Mass Framework in Unreal Engine",
+    "h1": "Steering with Mass Framework",
+    "h2": "Processing Steering with MassAI built-in resources",
+    "h3": "Steering Trait Fragments for Steering Steering Processor Anything unclear?",
+    "h4": "Required Fragments Added fragments",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/unreal-engine/mass/visualization",
+    "title": "Visualization with Mass Framework in Unreal Engine",
+    "h1": "Visualization with Mass Framework",
+    "h2": "Processing Visualization with MassGameplay built-in resources Visualization Trait Visualization Trait / Crowd Visualization Trait",
+    "h3": "Visualization Traits inheritance Visualization Traits work uses following fragments (beside others): Anything unclear?",
+    "h4": "",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/unreal-engine/material",
+    "title": "Working with Material in Unreal Engine",
+    "h1": "Working with Material in Unreal Engine",
+    "h2": "Create Material Graph with C++ Assign Material to Mesh in C++",
+    "h3": "Build Material Add TextureParameter node to Material Add ScalarParameter node to Material Add VectorParameter node to Material Add MultiplyExpression node to Material Add TexCoordExpression node to Material GetExistingMaterialExpressionFromName helpe function Anything unclear?",
+    "h4": "",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/unreal-engine/meshes",
+    "title": "Meshes in Unreal Engine",
+    "h1": "Meshes in Unreal Engine",
+    "h2": "Static Mesh (SM) vs Instance SM (ISM)",
+    "h3": "Why rendering separate objects is slow? Instanced Static mesh Hierarhical Instanced Static mesh Anything unclear?",
+    "h4": "Drawing 100 meshes",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/unreal-engine/movement",
+    "title": "Movement & Turning in Unreal Engine",
+    "h1": "Movement & Rotation in Unreal Engine",
+    "h2": "Movement in Unreal Engine Casting Local / World Transforms (Location, Rotation, Scale properties)",
+    "h3": "Movement initializators Actors Movement Pawn Movement Movement by Impulse Movement component Example 1 - Getting APlayerController refference Local Coordinate System Transforming between Global and Local space Anything unclear?",
+    "h4": "Movement based on user's axes and actions input AI Movement Movement with predefined trajectory and timing Example 1 - AActor::AddActorLocalOffset() Example 2 - AActor::SetActorLocation() Sweeping bSweep Example 1 - APawn::AddMovementInput() Example 2 - UPawnMovementComponent::AddInputVector() UProjectileMovementComponent Example 2 - Getting APawn derived class refference Vector Transform",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/unreal-engine/namespace",
+    "title": "Namespace in Unreal Engine",
+    "h1": "Namespace in Unreal Engine",
+    "h2": "Naming Conventions Assets prefixes Blueprints prefixes Particle Effects prefixes Skeletal Mesh Animations Animation Media Others",
+    "h3": "Prefixes: Material assets profixes Anything unclear?",
+    "h4": "",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/unreal-engine/packaging/android",
+    "title": "Configuration for packaging for Android in Unreal Engine",
+    "h1": "Packaging on Android-based devices in Unreal Engine",
+    "h2": "Required tools ADB (Android Debug bridge)",
+    "h3": "Linking tools to Unreal Engine Anything unclear?",
+    "h4": "",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/unreal-engine/packaging/sharing-project",
+    "title": "Distributing an Unreal Engine C++ Project Without Rebuilding (Client-Ready Package)",
+    "h1": "Distributing an Unreal Engine C++ Project Without Rebuilding (Client-Ready Package)",
+    "h2": "Project Delivery Options Required Folders to Include Quick Checklist Before Sending",
+    "h3": "Folders Safe to Delete Before Sending Alternative: Sending a Play-Only Build Anything unclear?",
+    "h4": "",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/unreal-engine/physics",
+    "title": "Physics in Unreal Engine",
+    "h1": "Physics in Unreal Engine",
+    "h2": "Simulate physics checkbox Physics Constraint Component Physics Control Component Vehicle physics",
+    "h3": "Mechanical joints using Physics Constraints Anything unclear?",
+    "h4": "",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/unreal-engine/plugins",
+    "title": "Plugins in Unreal Engine - List with characteristics",
+    "h1": "Project Plugins in Unreal Engine",
+    "h2": "Plugins in Unreal Engine Working with Plugins in Development and Projects Creating a Project Plugin in Unreal Engine Editor Standalone Window Plugin Editor Toolbar Button Plugin Creating a C++ Class for the Plugin Process of Moving a Plugin from One Project to Another Accessing data in the plugin's Content folder",
+    "h3": "Basic plugin configuration Anything unclear?",
+    "h4": "",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/unreal-engine/profiling",
+    "title": "Profiling & Optimizing for the best performance in Unreal Engine",
+    "h1": "Performance Profiling in Unreal Engine",
+    "h2": "Frame Render Time Performance profiling Displaying measuring metrics Identification of the problematic thread Recording performance metrics Other Console commands GPU Visualizer Visible way of measuring LODs Profiling processes",
+    "h3": "Common fps rates in milliseconds (1 second = 1,000 milliseconds) General Preparation for profiling Console commands stat unit / stat unitgraph Session Frontend Viewer stat gpu stat InitViews stat RHI stat scenerendering Anything unclear?",
+    "h4": "GPU Visualizer properties:",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/unreal-engine/project-settings",
+    "title": "Project Settings in Unreal Engine",
+    "h1": "Unreal Engine / Project Settings",
+    "h2": "",
+    "h3": "Anything unclear?",
+    "h4": "",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/unreal-engine/project-settings/appearance",
+    "title": "Appearance Settings in Unreal Engine",
+    "h1": "Unreal Engine / Project Settings Appearance",
+    "h2": "Editor Units",
+    "h3": "Anything unclear?",
+    "h4": "",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/unreal-engine/project-settings/rendering",
+    "title": "Rendering Settings in Unreal Engine",
+    "h1": "Unreal Engine / Project Settings Rendering",
+    "h2": "Mobile Forward Renderer Default Settings Translucency VR Postprocessing",
+    "h3": "Forward Shading Foveation Anything unclear?",
+    "h4": "",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/unreal-engine/renderer",
+    "title": "Renderer & Anti-Aliasing configuration in Unreal Engine",
+    "h1": "Renderer & Anti-Aliasing configuration in Unreal Engine",
+    "h2": "Rendering options in Unreal Engine Where to enter console commands How to configure renderer & AA in project settings How to verify the active rendering pipeline How to evaluate performance across renderers",
+    "h3": "1. Forward Renderer 2. Deferred Renderer Which to choose? Quick final summary & comparison Important note about MSAA vs FXAA/TAA How to confirm real MSAA state Enable Forward Renderer Enable Deferred Renderer Configure MSAA (Forward only) Configure FXAA / TAA Check renderer: Check anti-aliasing: Check MSAA state: Check TAA quality (Deferred only) 1. On-screen performance metrics 2. Subjective clarity checks 3. Repeatable benchmark scenario Example rating table (fill in for your project) Anything unclear?",
+    "h4": "",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/unreal-engine/sequence",
+    "title": "Working with Sequence in Unreal Engine",
+    "h1": "Level / Master Sequence in Unreal Engine",
+    "h2": "Level Sequences serve several purposes: Classes Inheritance Hiearchy Load Level Sequence (Helper function) Add / Remove Possessable Actors In Level Sequence Add / Remove Spawnable Actors In Level Sequence Add Animation In Level Sequence Add / Remove Camera Cut Track In Level Sequence Add / Remove Folder(s) In Level Sequence Add / Remove Shot(s) In Level Sequence Add / Remove Subsequence In Level Sequence Add / Remove Level Visibility Track In Level Sequence Add / Remove Transform Track In Level Sequence Add / Remove Keyframe to / from transform section In Level Sequence Modify a keyframe interpolation in a transform section in a level sequence Visibility Keyframe In Level Sequence with C++ Add Material Parameter Collection Keyframe In Level Sequence Add BP Variables Keyframe In Level Sequence Start the Render of a Level Sequence",
+    "h3": "Get Actor Guid From Level Sequence Add an actor into a level sequence Remove an actor from a level sequence Get spawnable guid from level sequence based on its name Add a spawnable into a level sequence Remove a spawnable from a level sequence Get a camera cut track from a level sequence Add a camera cut track to a level sequence Remove a camera cut track from a level sequence Link a camera to a camera cut track in a level sequence Get a folder from a level sequence Add a folder to a level sequence Remove a folder from a level sequence Move an actor in a folder in a level sequence Move an actor out of a folder in a level sequence Get a shot track from a level sequence Add a shot track to a level sequence Remove a shot track from a level sequence Link a level sequence to a shot track in a level sequence Get a subsequence track from a level sequence Add a subsequence track to a level sequence Remove a subsequence track from a level sequence Get a level visibility track from a level sequence Add a level visibility track to a level sequence Remove a level visibility track from a level sequence Link a level sequence to a level visibility track in a level sequence Get the transform track from an actor in a level sequence Add a transform track to an actor in a level sequence Remove a transform track from an actor in a level sequence Get the transform section from an actor in a level sequence Add a transform section to an actor in a level sequence Remove a transform section from an actor in a level sequence Add a keyframe to a transform section in a level sequence Remove a keyframe from a transform section in a level sequence Add a keyframe to a double channel in a level sequence Remove a keyframe from a double channel in a level sequence Add a keyframe to a Visibility track Remove a keyframe from a Visibility track in a level sequence Anything unclear?",
+    "h4": "",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/unreal-engine/skeletal-animation",
+    "title": "Skeletal Animation in Unreal Engine",
+    "h1": "Working with Sound in Unreal Engine",
+    "h2": "Skeleton for Character Animations Animation Blueprint (ABP) Animation Blend Space (BS) Connecting Animation to Gameplay",
+    "h3": "Animation assets Event Graph and Anim Graph tabs in Animation Blueprint Creating an Animation Blueprint Setting Anim Graph in Animation Blueprint Creating an Animation Blend Space Blend Space Asset Details Tab Calculating Animation Speed Slowing Down Animations with Blend Space Blueprint Pure Node UFUNCTION(BlueprintPure) Anything unclear?",
+    "h4": "State Machine BP node Animation Speed calculation",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/unreal-engine/skeletal-mesh",
+    "title": "Working with Skeletal Mesh in Unreal Engine",
+    "h1": "Working with Skeletal Mesh in Unreal Engine",
+    "h2": "Skeletal meshes Import Skeletal Mesh Import animation for Skeletal Mesh Assign material for Skeletal Mesh",
+    "h3": "Anything unclear?",
+    "h4": "",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/unreal-engine/sound",
+    "title": "Working with Sound in Unreal Engine",
+    "h1": "Working with Sound in Unreal Engine",
+    "h2": "Ambient Sound Actor Play Sound At Location",
+    "h3": "Sound Cue Anything unclear?",
+    "h4": "Creating a Sound Cue Sound Cue options Sound Attenuation and Spatialization",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/unreal-engine/static-mesh",
+    "title": "Working with Static Mesh in Unreal Engine",
+    "h1": "Working with Static Mesh in Unreal Engine",
+    "h2": "Static Meshes Instanced Static Mesh Import Static Mesh - .fbx file Assign material for Static Mesh Generate Static Mesh Collisions With C++",
+    "h3": "Auto generate a convex collision for a static mesh Remove collisions from a static mesh Add Box Collision To Static Mesh Add Sphere Collision To Static Mesh Add Capsule Collision To Static Mesh Anything unclear?",
+    "h4": "",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/unreal-engine/ufunction",
+    "title": "UFUNCTION() specifiers in Unreal Engine",
+    "h1": "UFUNCTION specifiers in Unreal Engine",
+    "h2": "UFUNCTION specifier in C++ (Unreal Engine)",
+    "h3": "Anything unclear?",
+    "h4": "",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/unreal-engine/ui",
+    "title": "Working with User Interface (UI) in Unreal Engine",
+    "h1": "Working with User Interface (UI) in Unreal Engine",
+    "h2": "Text Render Actor (Isolated UI Element) Unreal Motion Graphics (UMG) Stereo Layers Head-up Display (HUD) in VR UI Wiki",
+    "h3": "2 Widget types in Unreal Engine UMG + Mip-maps Anything unclear?",
+    "h4": "Widget Blueprint Editor Utility Widget",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/unreal-engine/ui/widget",
+    "title": "Working with UI Widgets in Unreal Engine",
+    "h1": "Working with UI Widgets in Unreal Engine",
+    "h2": "Creating a Blueprint Widget Blueprint Widget viewer & editor Widget's components architecture Menu Menu UI Mounting Interaction with Menu Widget",
+    "h3": "Definition of 3DWidget trace channel in collisions Setting Collision Presets on the Menu Widget Widget Interaction component on Controllers Anything unclear?",
+    "h4": "",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/unreal-engine/uproperty",
+    "title": "UPROPERTY() specifiers in Unreal Engine",
+    "h1": "UPROPERTY specifiers in Unreal Engine",
+    "h2": "UPROPERTY specifier in C++ (Unreal Engine)",
+    "h3": "Anything unclear?",
+    "h4": "",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/unreal-engine/variables",
+    "title": "Variables in Unreal Engine - List with characteristics",
+    "h1": "Variables in Unreal Engine",
+    "h2": "Variables in Unreal Engine Variable type conversion",
+    "h3": "Numerical values Integers Vectors Text values Anything unclear?",
+    "h4": "",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/virtual-reality",
+    "title": "Virtual Reality Services for Business",
+    "h1": "Virtual reality for training and presentation",
+    "h2": "Choose the VR use case you want to solve. VR works best when the experience has a clear business purpose. Planning a VR project?Let us choose the right form for it.",
+    "h3": "Professional VR simulations VR property visualization Immersive presentation Custom interactions Technical pipeline",
+    "h4": "",
+    "h5": "",
+    "h6": "Consultant, Vrealmatic"
+  },
+  {
+    "id": "/virtual-reality/property-visualization",
+    "title": "VR Property Visualization for Developers",
+    "h1": "Show the property before it exists",
+    "h2": "The main advantage: the presentation does not stay in the showroom. What we deliver Suitable for How it works Want to present a property in VR?Send us the project and we will suggest the simplest setup.",
+    "h3": "Show it in VR Let clients open it at home VR and desktop app Presentation setup Optional interactions 1. We define the presentation 2. We tune the first project 3. You get the application",
+    "h4": "",
+    "h5": "",
+    "h6": "Consultant, Vrealmatic"
+  },
+  {
+    "id": "/vr-training",
+    "title": "Virtual reality training for employees in Virtual Reality",
+    "h1": "Learning through playful activities. We will help you develop applications for interactive training of employees in Virtual Reality.",
+    "h2": "Education that is effective Virtual reality is the future of education",
+    "h3": "Technical staff prefer VR training Better memorability of skills and lower error rate 5.7x faster surgeon training Publication: Training and education using immersive technologies We're ready to assist you",
+    "h4": "",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/vstation",
+    "title": "VStation platform | Vrealmatic.com",
+    "h1": "Visualisation, communication, control and predictionPlatform",
+    "h2": "Web Interface & Cloud Experienced worker included in the subscription Open platform with preparation for integrations and connections Comprehensive analytics and tailor-made presentation A simple demonstrationis worth more than a thousand words",
+    "h3": "",
+    "h4": "",
+    "h5": "",
+    "h6": "Consultant, Olomouc, Czechia"
+  },
+  {
+    "id": "/walletconnect",
+    "title": "WalletConnect Introduction",
+    "h1": "WalletConnect",
+    "h2": "What is WalletConnect? How does WalletConnect v2 work? Integrating WalletConnect v2 - Demo",
+    "h3": "Purpose of WalletConnect What does WalletConnect simplify? How does WalletConnect ensure security? WalletConnect Features 🔗 Connection Initialization 🔒 Encrypted Communication via Decentralized Relayers 📝 Transaction Signing & Address Verification ❌ Disconnecting the Session Anything unclear?",
+    "h4": "Session Creation Transaction Flow:",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/warehouse",
+    "title": "Optimization and design of an efficient warehouse",
+    "h1": "We will help you to manage, optimise, design and operate your warehouse and its logistics as efficiently as possible.",
+    "h2": "Greater efficiency and better decision-making How is warehouse optimization performed? The principle of creating a model of transport on conveyors",
+    "h3": "Creating a parametric model for every variant Simulation of the operational functioning of the warehouse Evaluation and comparison of sub-parameters of individual variations Incorporating functional changes into the warehouse We're ready to assist you",
+    "h4": "",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/web",
+    "title": "Web Services for Growth & Performance | Vrealmatic",
+    "h1": "We connect websites, performance and AI into one useful web ecosystem",
+    "h2": "Choose the web service that matches your current situation. A website is strongest when the offer, technology and measurement are designed together. We start with the real state of the website and move toward practical delivery. We are useful when the web should become a serious channel, not only a static presentation. Need a partner for your web services?Tell us what should improve first.",
+    "h3": "One partner for the whole web path Website development Website management Website speed AI website audit AI SEO optimizer Map the situation Set priorities Implement Verify",
+    "h4": "",
+    "h5": "",
+    "h6": "Web services partner"
+  },
+  {
+    "id": "/web/development",
+    "title": "Custom Web Development | Premium Websites and Web Applications",
+    "h1": "We build websites as a platform for purposeful continuity",
+    "h2": "A useful website works for you and your customers. Together, we prepare the whole path from the first idea to a properly launched website. You get a website ready for current needs and further development. One web product can cover more uses without separate tools. We build on modern technologies that keep websites fast, scalable and economical to operate. The service is strongest when the website must connect more than a page. We stand behind websites with large audiences and real operational load. We are the right partner when the result really matters. Need a website that connects your project with what comes next?Let us design the digital base properly.",
+    "h3": "Web systems that grow with you Website as presentation Website as system Website as connection layer Technology and operation Clarify Structure Build Launch Multilingual structure Device-custom features PWA and performance Global delivery WebXR WebAR Cloudflare TypeScript Next.js Express.js Web3 PacoGames GameArter Games44 Let's work together if... We will not be the best fit if...",
+    "h4": "",
+    "h5": "",
+    "h6": "Web consulting"
+  },
+  {
+    "id": "/web/management",
+    "title": "Management, maintenance and development of websites | Vealmatic",
+    "h1": "We manage websites so they keep serving, evolving and staying reliable",
+    "h2": "A website works best when someone is responsible for its daily reality. We cover the practical work that keeps a website alive and useful. You get a website that has a responsible technical and content partner. Website management can be regular care or flexible support. This service makes sense when the website should keep moving after launch. We are useful when you want ownership, continuity and technical judgment in one place. Need someone to take care of your website?Send us the URL and what currently needs attention.",
+    "h3": "Ongoing care for a living website Content and pages Technical maintenance Further development Measurement and improvement Take over Prioritize Deliver Improve Regular website care Campaign and content support Development backlog Emergency fixes Let's work together if... We will not be the best fit if...",
+    "h4": "",
+    "h5": "",
+    "h6": "Website management partner"
+  },
+  {
+    "id": "/web/speed",
+    "title": "Website Speed Optimization | PageSpeed Insights & Core Web Vitals",
+    "h1": "We optimize website speed for real visitors",
+    "h2": "We track the metrics PageSpeed shows for real users. Good PageSpeed Insights results come from combining the whole technical mix. We work across infrastructure, backend, frontend and resource timing. We do not deliver a report. We deliver a faster website and proof of the result. The most valuable changes balance speed, website function and operational reality. This service makes sense when you need better real-world performance, not a nice screenshot from a test. Need to speed up your website based on real data?Send us the URL and we will inspect the whole performance chain.",
+    "h3": "Core Web Vitals in the real world Core Web Vitals assessment Infrastructure and backend Frontend and rendering JavaScript and CPU thread Third-party resources Measure Decide Optimize Verify",
+    "h4": "Largest Contentful Paint Interaction to Next Paint Cumulative Layout Shift First Contentful Paint Time to First Byte",
+    "h5": "",
+    "h6": "Web performance consultant"
+  },
+  {
+    "id": "/web3",
+    "title": "Web3 Stack, technology and applications",
+    "h1": "Web3",
+    "h2": "Web3 Architecture",
+    "h3": "Anything unclear?",
+    "h4": "",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/web3/appkit",
+    "title": "NextJS AppKit components for Web3",
+    "h1": "NextJS AppKit components for Web3",
+    "h2": "Disconnect Safe Wallet",
+    "h3": "Anything unclear?",
+    "h4": "",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/web3/libraries",
+    "title": "Libraries for Web3",
+    "h1": "List of Packages for interacting with blockchain",
+    "h2": "Wallet connectors Chain interactors Web3 libraries",
+    "h3": "Ethers Viem Wagmi Anything unclear?",
+    "h4": "",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/web3/stack",
+    "title": "Stack for Web3",
+    "h1": "Web3 Stack Introduction",
+    "h2": "Best and Most Secure Web3 Frontend Stack Web3 Frontend Stack Conclusion",
+    "h3": "Programming Language Frontend Framework Web3 Libraries for Blockchain Interaction UI Libraries & Styling State Management & Data Handling Authentication & Security RPC & Blockchain Data Indexing Deployment & Hosting Why this stack? Anything unclear?",
+    "h4": "",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/webxr/commercial-solutions",
+    "title": "Commercial Solutions Overview for WebXR",
+    "h1": "Overview of Commercial Solutions for WebXR",
+    "h2": "Selecting the Right Solution BlippAR.com Onirix.com Zap.works Web-AR.studio 8thWall.com WebAR.rocks",
+    "h3": "Solutions Overview BLIPPBUILDER Platform WebAR SDK Custom Development Usage Costs Zapworks Designer Mattercraft Zapworks Package / Library Způsob a možnosti vývoje, otevřenost Zázemí Náklady používání Způsob provozu Hodnocení Anything unclear?",
+    "h4": "Usage Costs",
+    "h5": "",
+    "h6": ""
+  },
+  {
+    "id": "/wiki/data-oriented-design",
+    "title": "Data-Oriented design explanation | Vrealmatic Wiki",
+    "h1": "Data-Oriented design",
+    "h2": "Data-Oriented design explanation",
+    "h3": "Anything unclear?",
+    "h4": "",
+    "h5": "",
+    "h6": ""
+  }
+]
