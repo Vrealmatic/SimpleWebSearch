@@ -231,8 +231,14 @@ export const czechStopWords = [
   "že",
 ] as const;
 
-export function resolveStopWords(value: "en" | "cs" | string[] | undefined): string[] {
-  const words = value === "en" ? englishStopWords : value === "cs" ? czechStopWords : (value ?? []);
+export function resolveStopWords(value: string | string[] | undefined): string[] {
+  const input = typeof value === "string" ? value.split(",") : (value ?? []);
+  const words = input.flatMap((word) => {
+    const normalized = word.trim().toLowerCase();
+    if (normalized === "en") return englishStopWords;
+    if (normalized === "cs") return czechStopWords;
+    return normalized ? [normalized] : [];
+  });
   return [...new Set(words.map((word) => word.trim().toLowerCase()).filter(Boolean))].sort();
 }
 

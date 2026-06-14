@@ -2,7 +2,7 @@
 import { Command, Option } from "commander";
 import { generateSearchIndex } from "./index.js";
 import { loadConfig, mergeOptions } from "./config.js";
-import type { GeneratorOptions } from "./types.js";
+import type { GeneratorOptions, SearchField } from "./types.js";
 
 const program = new Command()
   .name("heading-search-index")
@@ -11,12 +11,14 @@ const program = new Command()
   .option("--output <directory>")
   .option("--include-selector <selector>")
   .option("--exclude-selector <selector>")
+  .option("--fields <fields>", "comma-separated fields to index, for example: h1 or title,h1")
   .addOption(new Option("--concurrency <number>").argParser(Number))
   .addOption(new Option("--timeout <milliseconds>").argParser(Number))
   .option("--base-url <url>")
   .option("--user-agent <value>")
-  .option("--stop-words <preset>", "stop-word preset (en or cs)")
+  .option("--stop-words <words>", "preset or comma-separated words, for example: en,free,games")
   .option("--config <path>")
+  .option("--client", "also write a browser ESM bundle as search-client.js")
   .option("--pretty")
   .option("--verbose");
 
@@ -29,6 +31,7 @@ async function main(): Promise<void> {
     ...(flags.sitemap ? { sitemap: flags.sitemap } : {}),
     ...(flags.output ? { output: flags.output } : {}),
     ...(flags.baseUrl ? { baseUrl: flags.baseUrl } : {}),
+    ...(flags.client ? { client: true } : {}),
     ...(flags.pretty ? { pretty: true } : {}),
     ...(flags.verbose ? { verbose: true } : {}),
     crawler: {
@@ -38,11 +41,15 @@ async function main(): Promise<void> {
       ...(flags.timeout !== undefined ? { timeout: flags.timeout } : {}),
       ...(flags.userAgent ? { userAgent: flags.userAgent } : {}),
     },
-    ...(flags.stopWords ? { search: { stopWords: flags.stopWords } } : {}),
+    ...(flags.fields || flags.stopWords
+      ? {
+          search: {
+            ...(flags.fields ? { fields: parseFields(flags.fields) } : {}),
+            ...(flags.stopWords ? { stopWords: flags.stopWords } : {}),
+          },
+        }
+      : {}),
   };
-  if (flags.stopWords && flags.stopWords !== "en" && flags.stopWords !== "cs") {
-    throw new Error('--stop-words supports the "en" and "cs" presets');
-  }
   const options = mergeOptions(configured, cli);
   if (!options.sitemap || !options.output)
     throw new Error("--sitemap and --output are required unless provided by --config");
@@ -51,6 +58,13 @@ async function main(): Promise<void> {
   console.log(
     `Indexed ${result.report.indexedUrls}/${result.report.discoveredUrls} pages into ${result.output}`,
   );
+}
+
+function parseFields(value: string): SearchField[] {
+  return value
+    .split(",")
+    .map((field) => field.trim())
+    .filter(Boolean) as SearchField[];
 }
 
 main().catch((error) => {

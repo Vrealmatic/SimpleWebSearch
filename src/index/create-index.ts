@@ -2,7 +2,6 @@ import MiniSearch from "minisearch";
 import { createTermProcessor } from "../stop-words.js";
 import type { ResolvedOptions, SearchDocument } from "../types.js";
 
-export const fields = ["title", "h1", "h2", "h3", "h4", "h5", "h6"] as const;
 export const storeFields = ["title"] as const;
 
 export function createIndex(
@@ -10,7 +9,7 @@ export function createIndex(
   options: ResolvedOptions,
 ): MiniSearch<SearchDocument> {
   const search = new MiniSearch<SearchDocument>({
-    fields: [...fields],
+    fields: options.search.fields,
     storeFields: [...storeFields],
     processTerm: createTermProcessor(options.search.stopWords),
   });

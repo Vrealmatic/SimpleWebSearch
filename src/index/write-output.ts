@@ -1,8 +1,8 @@
-import { mkdir, rename, rm, writeFile } from "node:fs/promises";
+import { copyFile, mkdir, rename, rm, writeFile } from "node:fs/promises";
 import { basename, dirname, join } from "node:path";
 import type MiniSearch from "minisearch";
-import { fields, storeFields } from "./create-index.js";
-import type { ResolvedOptions, SearchDocument, SearchReport } from "../types.js";
+import { storeFields } from "./create-index.js";
+import type { ResolvedOptions, SearchDocument, SearchReport, SearchWeights } from "../types.js";
 
 export async function writeOutput(
   index: MiniSearch<SearchDocument>,
@@ -17,10 +17,10 @@ export async function writeOutput(
   try {
     await mkdir(temporary, { recursive: true });
     const config = {
-      fields: [...fields],
+      fields: options.search.fields,
       storeFields: [...storeFields],
       searchOptions: {
-        boost: options.weights,
+        boost: pickActiveBoost(options),
         prefix: options.search.prefix,
         fuzzy: options.search.fuzzy,
         stopWords: options.search.stopWords,
@@ -32,6 +32,9 @@ export async function writeOutput(
       writeFile(join(temporary, "search-config.json"), JSON.stringify(config, null, space)),
       writeFile(join(temporary, "search-report.json"), JSON.stringify(report, null, space)),
     ]);
+    if (options.client) {
+      await copyFile(new URL("./client.js", import.meta.url), join(temporary, "search-client.js"));
+    }
     await rm(options.output, { recursive: true, force: true });
     await rename(temporary, options.output);
   } catch (error) {
@@ -40,4 +43,10 @@ export async function writeOutput(
       `Unable to write index to ${options.output}: ${error instanceof Error ? error.message : String(error)}`,
     );
   }
+}
+
+export function pickActiveBoost(options: ResolvedOptions): Partial<SearchWeights> {
+  return Object.fromEntries(
+    options.search.fields.map((field) => [field, options.weights[field]]),
+  ) as Partial<SearchWeights>;
 }

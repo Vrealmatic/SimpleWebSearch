@@ -19,6 +19,9 @@ export interface SearchWeights {
   h6: number;
 }
 
+export type SearchField = keyof SearchWeights;
+export type StopWordsInput = "en" | "cs" | string | string[];
+
 export interface GeneratorOptions {
   sitemap: string;
   output: string;
@@ -35,11 +38,13 @@ export interface GeneratorOptions {
   };
   weights?: Partial<SearchWeights>;
   search?: {
+    fields?: SearchField[];
     prefix?: boolean;
     fuzzy?: number | boolean;
-    stopWords?: "en" | "cs" | string[];
+    stopWords?: StopWordsInput;
   };
   baseUrl?: string;
+  client?: boolean;
   pretty?: boolean;
   verbose?: boolean;
 }
@@ -59,8 +64,14 @@ export interface ResolvedOptions {
     userAgent: string;
   };
   weights: SearchWeights;
-  search: { prefix: boolean; fuzzy: number | boolean; stopWords: string[] };
+  search: {
+    fields: SearchField[];
+    prefix: boolean;
+    fuzzy: number | boolean;
+    stopWords: string[];
+  };
   baseUrl?: string;
+  client: boolean;
   pretty: boolean;
   verbose: boolean;
 }

@@ -1,6 +1,7 @@
 # heading-search-index
 
 Framework-independent Node.js 20+ tool that follows a sitemap tree, extracts page titles and `h1`-`h6` headings, and writes a browser-loadable MiniSearch index plus audit files. It reads server-rendered HTML only; it does not execute JavaScript.
+- Try it live at [vrealmatic.com](https://vrealmatic.com/)
 
 ## Installation and CLI
 
@@ -13,12 +14,17 @@ npx heading-search-index --sitemap https://example.com/sitemap.xml --output ./pu
 heading-search-index \
   --sitemap https://example.com/sitemap.xml \
   --output ./public/search \
+  --fields title,h1,h2,h3,h4,h5,h6 \
   --include-selector main \
   --exclude-selector "nav, footer, [data-search-ignore]" \
-  --concurrency 5 --timeout 15000 --stop-words en --pretty --verbose
+  --concurrency 5 --timeout 15000 --stop-words en,custom-word --client --pretty --verbose
 ```
 
-Options are `--sitemap`, `--output`, `--include-selector`, `--exclude-selector`, `--concurrency`, `--timeout`, `--base-url`, `--user-agent`, `--stop-words`, `--config`, `--pretty`, and `--verbose`. Sitemap and output are required unless supplied by a config file. CLI values override config values.
+Options are `--sitemap`, `--output`, `--fields`, `--include-selector`, `--exclude-selector`, `--concurrency`, `--timeout`, `--base-url`, `--user-agent`, `--stop-words`, `--client`, `--config`, `--pretty`, and `--verbose`. Sitemap and output are required unless supplied by a config file. CLI values override config values.
+
+Use CLI flags for one-off generation. Use `heading-search.config.ts` when the command becomes long or repeated. `src/config.ts` is only internal package code that loads the config file, applies defaults, and lets CLI flags override the file.
+
+`includeSelector` and `excludeSelector` solve different problems. `includeSelector` chooses the page region to inspect, for example `main`. `excludeSelector` removes unwanted elements inside that region before extraction, for example breadcrumbs, sidebars, CTAs, or `[data-search-ignore]`.
 
 ## Configuration
 
@@ -37,14 +43,29 @@ export default {
     absoluteIds: false,
     skipNoindex: true,
   },
+  search: {
+    fields: ["title", "h1", "h2", "h3", "h4", "h5", "h6"],
+    prefix: true,
+    fuzzy: 0.2,
+    stopWords: "en",
+  },
   weights: { title: 12, h1: 10, h2: 6, h3: 4, h4: 2, h5: 1, h6: 1 },
-  search: { prefix: true, fuzzy: 0.2, stopWords: "en" },
 };
 ```
 
 Run it with `npx heading-search-index --config heading-search.config.ts`. By default only page URLs on the sitemap origin are indexed. Set `crawler.sameOrigin` to `false` to allow other origins.
 
-`search.stopWords` accepts the built-in `"en"` and `"cs"` presets or a custom array such as `["the", "and", "company"]`. Stop words are removed while building the index and the generated client configuration applies the same term processor when loading and searching it. No stop words are removed unless this option is configured.
+`search.fields` controls what is indexed. Use `--fields h1` when only page `h1` headings should be searchable. `search.stopWords` accepts the built-in `"en"` and `"cs"` presets, comma-separated CLI additions such as `--stop-words en,free,games`, or a custom config array such as `["the", "and", "company"]`. Stop words are removed while building the index and the generated client configuration applies the same term processor when loading and searching it.
+
+Example for an English game site that should search only `h1` headings:
+
+```bash
+heading-search-index \
+  --sitemap https://www.pacogames.com/sitemap/en \
+  --output ./public/search/en \
+  --fields h1 \
+  --stop-words en,free,game,games,play,online,html5,browser
+```
 
 ## Node.js API
 
@@ -67,6 +88,7 @@ console.log(result.report);
 - `search-documents.json`: deterministic, readable audit data. It is not needed by the browser search.
 - `search-config.json`: fields, stored fields, boosts, and search defaults needed by the client.
 - `search-report.json`: timings, counts, missing headings, canonical duplicates, skips, and failures.
+- `search-client.js`: optional browser ESM bundle written when `--client` is used.
 
 Write the directory during the build and deploy it as static assets. Generation uses a temporary sibling directory and only replaces the destination after all four files have been written.
 
@@ -89,7 +111,7 @@ The lazy client then downloads:
 </div>
 ```
 
-The bootstrap belongs in the site's normal client bundle, but the search implementation becomes a separate chunk through dynamic `import()`:
+If the site has a bundler, the bootstrap can import the package client and let the bundler create the lazy chunk:
 
 ```ts
 const area = document.querySelector<HTMLElement>("[data-search]");
@@ -124,6 +146,26 @@ if (area && input && output) {
   input.addEventListener("focus", activate, { once: true });
 }
 ```
+
+If the site does not bundle this TypeScript module, generate a ready-to-serve browser bundle with `--client` and import that static file instead:
+
+```bash
+heading-search-index \
+  --sitemap https://example.com/sitemap.xml \
+  --output ./public/search \
+  --client
+```
+
+```ts
+const activate = () => {
+  loading ??= import("/search/search-client.js")
+    .then(({ attachSearch }) => attachSearch({ input, onResults }))
+    .then(() => undefined);
+  return loading;
+};
+```
+
+You do not need to run `esbuild` in each consuming site when `--client` is used. The generated `search-client.js` already includes the browser search client and MiniSearch as a single ESM file.
 
 `attachSearch` installs a debounced `input` listener, searches with field boosts and prefix matching, enables fuzzy matching from four characters, and returns a cleanup function. Its defaults are `/search/search-index.json`, `/search/search-config.json`, 150 ms debounce, and 10 results. See [`examples/lazy-search`](./examples/lazy-search) for the complete framework-independent example.
 

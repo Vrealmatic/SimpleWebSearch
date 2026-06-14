@@ -1,8 +1,10 @@
 import { resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 import { createJiti } from "jiti";
-import type { GeneratorOptions, ResolvedOptions, SearchWeights } from "./types.js";
+import type { GeneratorOptions, ResolvedOptions, SearchField, SearchWeights } from "./types.js";
 import { resolveStopWords } from "./stop-words.js";
+
+export const defaultFields: SearchField[] = ["title", "h1", "h2", "h3", "h4", "h5", "h6"];
 
 export const defaultWeights: SearchWeights = {
   title: 12,
@@ -48,14 +50,26 @@ export function resolveOptions(options: GeneratorOptions): ResolvedOptions {
     },
     weights: { ...defaultWeights, ...options.weights },
     search: {
+      fields: resolveFields(options.search?.fields),
       prefix: options.search?.prefix ?? true,
       fuzzy: options.search?.fuzzy ?? 0.2,
       stopWords: resolveStopWords(options.search?.stopWords),
     },
     ...(options.baseUrl ? { baseUrl: options.baseUrl } : {}),
+    client: options.client ?? false,
     pretty: options.pretty ?? false,
     verbose: options.verbose ?? false,
   };
+}
+
+export function resolveFields(fields: SearchField[] | undefined): SearchField[] {
+  const resolved = fields?.length ? [...new Set(fields)] : defaultFields;
+  for (const field of resolved) {
+    if (!defaultFields.includes(field)) {
+      throw new Error(`Unsupported search field "${field}"`);
+    }
+  }
+  return resolved;
 }
 
 export function mergeOptions(

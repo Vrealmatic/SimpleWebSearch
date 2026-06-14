@@ -26,6 +26,7 @@ describe("generation", () => {
       output,
       pretty: true,
       crawler: { includeSelector: "main" },
+      search: { fields: ["h1"] },
     });
     expect(result.report).toMatchObject({ discoveredUrls: 2, indexedUrls: 1, failedUrls: 1 });
     for (const name of [
@@ -36,5 +37,11 @@ describe("generation", () => {
     ]) {
       expect(JSON.parse(await readFile(join(output, name), "utf8"))).toBeTruthy();
     }
+    await expect(
+      readFile(join(output, "search-config.json"), "utf8").then(JSON.parse),
+    ).resolves.toMatchObject({
+      fields: ["h1"],
+      searchOptions: { boost: { h1: 10 } },
+    });
   });
 });
