@@ -1,6 +1,7 @@
 # heading-search-index
 
 Framework-independent Node.js 20+ tool that follows a sitemap tree, extracts page titles and `h1`-`h6` headings, and writes a browser-loadable MiniSearch index plus audit files. It reads server-rendered HTML only; it does not execute JavaScript.
+
 - Try it live at [vrealmatic.com](https://vrealmatic.com/)
 
 ## Installation and CLI
@@ -25,6 +26,158 @@ Options are `--sitemap`, `--output`, `--fields`, `--include-selector`, `--exclud
 Use CLI flags for one-off generation. Use `heading-search.config.ts` when the command becomes long or repeated. `src/config.ts` is only internal package code that loads the config file, applies defaults, and lets CLI flags override the file.
 
 `includeSelector` and `excludeSelector` solve different problems. `includeSelector` chooses the page region to inspect, for example `main`. `excludeSelector` removes unwanted elements inside that region before extraction, for example breadcrumbs, sidebars, CTAs, or `[data-search-ignore]`.
+
+## Step-by-step implementation guide
+
+### 1. Install or build the tool
+
+In a consuming website project, install the package and run it with `npx`:
+
+```bash
+npm install --save-dev heading-search-index
+npx heading-search-index --help
+```
+
+When developing this package locally from the repository, build it first and run the compiled CLI:
+
+```bash
+npm install
+npm run build
+node dist/cli.js --help
+```
+
+### 2. Generate the search files
+
+For a simple static deployment, generate the browser client together with the data files:
+
+```bash
+npx heading-search-index \
+  --sitemap https://www.pacogames.com/sitemap/en \
+  --output ./public/search \
+  --fields h1 \
+  --stop-words en,free,game,games,play,online,html5,browser,paco,pacogames \
+  --client
+```
+
+If you are running from this repository before publishing the package, use the same flags with `node dist/cli.js`:
+
+```bash
+node dist/cli.js \
+  --sitemap https://www.pacogames.com/sitemap/en \
+  --output ./public/search \
+  --fields h1 \
+  --stop-words en,free,game,games,play,online,html5,browser,paco,pacogames \
+  --client
+```
+
+### 3. Check the generated output
+
+With `--output ./public/search --client`, the browser bundle is here:
+
+```text
+public/search/search-client.js
+```
+
+If `public/` is your web root, the browser URL is:
+
+```text
+/search/search-client.js
+```
+
+The generated directory contains:
+
+```text
+public/search/
+├── search-client.js
+├── search-index.json
+├── search-config.json
+├── search-documents.json
+└── search-report.json
+```
+
+For runtime search, deploy at least:
+
+```text
+/search/search-client.js
+/search/search-index.json
+/search/search-config.json
+```
+
+`search-documents.json` and `search-report.json` are useful for audits and debugging, but the browser client does not need them.
+
+### 4. Add HTML markup
+
+```html
+<div data-search>
+  <input type="search" autocomplete="off" data-search-input />
+  <div data-search-results aria-live="polite"></div>
+</div>
+```
+
+### 5. Lazy-load the search client
+
+This small bootstrap can live in your normal site JavaScript. It preloads search on hover and also works for keyboard/touch users through `focus`:
+
+```ts
+const area = document.querySelector<HTMLElement>("[data-search]");
+const input = area?.querySelector<HTMLInputElement>("[data-search-input]");
+const output = area?.querySelector<HTMLElement>("[data-search-results]");
+
+if (area && input && output) {
+  let loading: Promise<void> | undefined;
+
+  const activate = () => {
+    loading ??= import("/search/search-client.js")
+      .then(({ attachSearch }) =>
+        attachSearch({
+          input,
+          onResults(items) {
+            output.replaceChildren(
+              ...items.map((item) => {
+                const link = document.createElement("a");
+                link.href = String(item.id);
+                link.textContent = String(item.title);
+                return link;
+              }),
+            );
+          },
+        }),
+      )
+      .then(() => undefined);
+    return loading;
+  };
+
+  area.addEventListener("pointerenter", activate, { once: true });
+  input.addEventListener("focus", activate, { once: true });
+}
+```
+
+You do not need to run `esbuild` in the consuming website when `--client` is used. `search-client.js` is already a browser-ready ESM bundle and includes MiniSearch.
+
+### 6. Multi-locale layout
+
+Use one shared client and separate data files per locale:
+
+```text
+public/search/search-client.js
+public/search/en/search-index.json
+public/search/en/search-config.json
+public/search/cs/search-index.json
+public/search/cs/search-config.json
+```
+
+Then pass locale-specific URLs:
+
+```ts
+attachSearch({
+  input,
+  indexUrl: `/search/${locale}/search-index.json`,
+  configUrl: `/search/${locale}/search-config.json`,
+  onResults,
+});
+```
+
+The client can stay the same even when stop words differ by locale, because stop words are loaded from each locale's `search-config.json`.
 
 ## Configuration
 
@@ -165,7 +318,7 @@ const activate = () => {
 };
 ```
 
-You do not need to run `esbuild` in each consuming site when `--client` is used. The generated `search-client.js` already includes the browser search client and MiniSearch as a single ESM file.
+This is the same `search-client.js` described in the step-by-step guide above.
 
 `attachSearch` installs a debounced `input` listener, searches with field boosts and prefix matching, enables fuzzy matching from four characters, and returns a cleanup function. Its defaults are `/search/search-index.json`, `/search/search-config.json`, 150 ms debounce, and 10 results. See [`examples/lazy-search`](./examples/lazy-search) for the complete framework-independent example.
 
