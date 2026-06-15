@@ -63,13 +63,37 @@ Deploy at minimum `search-client.js`, `search-index.json`, and `search-config.js
 
 ### Markup
 
-Add a container with the required child elements. Attribute names on the container itself are arbitrary — the `data-*` below are only needed by the element-form API:
+The element-form API reads `data-search-base-url` and `data-empty-text` from the container and locates child elements by `data-search-input`, `data-search-results`, `data-search-message`, `data-search-list`, and `data-search-trigger`. Everything else — class names, IDs, ARIA attributes, surrounding `<form>` — is up to you.
+
+Wrapping the input in a `<form>` with a server-side `action` gives a no-JavaScript fallback: if the bundle hasn't loaded yet, submitting the form navigates to the search results page normally. Once the bundle activates, the JavaScript client intercepts input events and the form is never submitted.
+
+**Minimal example** (list of pages, no form fallback):
 
 ```html
-<div data-site-search data-search-base-url="/search/">
-  <button type="button" data-search-trigger aria-label="Open search">…</button>
+<div data-site-search data-search-base-url="/search/" data-empty-text="No results.">
   <input type="search" autocomplete="off" aria-label="Search" data-search-input />
   <div data-search-results hidden aria-live="polite">
+    <p data-search-message></p>
+    <ul data-search-list></ul>
+  </div>
+</div>
+```
+
+**With form fallback** — the `action` serves as a progressive-enhancement fallback when JavaScript is unavailable or slow:
+
+```html
+<div data-site-search data-search-base-url="/search/en/" data-empty-text="No results.">
+  <form role="search" data-search-form action="/api/search" method="get">
+    <button type="button" aria-label="Open search" data-search-trigger>…</button>
+    <input
+      name="q" type="search" role="combobox"
+      autocomplete="off" aria-autocomplete="list"
+      aria-expanded="false" aria-controls="search-results"
+      placeholder="Search…" aria-label="Search the website"
+      data-search-input
+    />
+  </form>
+  <div id="search-results" data-search-results hidden role="region" aria-live="polite">
     <p data-search-message></p>
     <ul data-search-list></ul>
   </div>

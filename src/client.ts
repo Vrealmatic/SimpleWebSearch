@@ -107,7 +107,9 @@ async function attachSearchToElement(area: HTMLElement): Promise<() => void> {
 
   const detach = await attachSearchWithOptions({
     input,
-    baseUrl: area.dataset.searchBaseUrl,
+    ...(area.dataset.searchBaseUrl !== undefined
+      ? { baseUrl: area.dataset.searchBaseUrl }
+      : {}),
     onResults,
   });
 
