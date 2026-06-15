@@ -16,6 +16,7 @@ interface SearchConfig {
 
 export interface SearchClientOptions {
   input: HTMLInputElement;
+  baseUrl?: string;
   indexUrl?: string;
   configUrl?: string;
   debounceMs?: number;
@@ -26,9 +27,10 @@ export interface SearchClientOptions {
 
 /** Load a generated index and attach debounced search behavior to an input. */
 export async function attachSearch(options: SearchClientOptions): Promise<() => void> {
+  const urls = resolveAssetUrls(options);
   const [indexResponse, configResponse] = await Promise.all([
-    fetch(options.indexUrl ?? "/search/search-index.json"),
-    fetch(options.configUrl ?? "/search/search-config.json"),
+    fetch(urls.indexUrl),
+    fetch(urls.configUrl),
   ]);
 
   if (!indexResponse.ok) {
@@ -79,5 +81,22 @@ export async function attachSearch(options: SearchClientOptions): Promise<() => 
   return () => {
     clearTimeout(timer);
     options.input.removeEventListener("input", handleInput);
+  };
+}
+
+export function resolveAssetUrls(
+  options: Pick<SearchClientOptions, "baseUrl" | "indexUrl" | "configUrl">,
+): {
+  indexUrl: string;
+  configUrl: string;
+} {
+  const base = options.baseUrl
+    ? options.baseUrl.endsWith("/")
+      ? options.baseUrl
+      : `${options.baseUrl}/`
+    : "/search/";
+  return {
+    indexUrl: options.indexUrl ?? `${base}search-index.json`,
+    configUrl: options.configUrl ?? `${base}search-config.json`,
   };
 }

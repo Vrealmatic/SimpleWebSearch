@@ -1,6 +1,6 @@
 import MiniSearch from "minisearch";
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { attachSearch } from "../src/client.js";
+import { attachSearch, resolveAssetUrls } from "../src/client.js";
 
 class TestInput extends EventTarget {
   value = "";
@@ -12,6 +12,26 @@ afterEach(() => {
 });
 
 describe("browser search client", () => {
+  it("resolves default, base, and explicit asset URLs", () => {
+    expect(resolveAssetUrls({})).toEqual({
+      indexUrl: "/search/search-index.json",
+      configUrl: "/search/search-config.json",
+    });
+    expect(resolveAssetUrls({ baseUrl: "https://cdn.example.com/search/en" })).toEqual({
+      indexUrl: "https://cdn.example.com/search/en/search-index.json",
+      configUrl: "https://cdn.example.com/search/en/search-config.json",
+    });
+    expect(
+      resolveAssetUrls({
+        baseUrl: "https://cdn.example.com/search/en",
+        indexUrl: "https://assets.example.com/custom-index.json",
+      }),
+    ).toEqual({
+      indexUrl: "https://assets.example.com/custom-index.json",
+      configUrl: "https://cdn.example.com/search/en/search-config.json",
+    });
+  });
+
   it("loads the generated files and attaches debounced prefix search", async () => {
     vi.useFakeTimers();
     const index = new MiniSearch({ fields: ["title"], storeFields: ["title"] });

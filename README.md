@@ -108,7 +108,7 @@ For runtime search, deploy at least:
 ### 4. Add HTML markup
 
 ```html
-<div data-search>
+<div data-search data-search-base-url="/search/">
   <input type="search" autocomplete="off" data-search-input />
   <div data-search-results aria-live="polite"></div>
 </div>
@@ -122,6 +122,7 @@ This small bootstrap can live in your normal site JavaScript. It preloads search
 const area = document.querySelector<HTMLElement>("[data-search]");
 const input = area?.querySelector<HTMLInputElement>("[data-search-input]");
 const output = area?.querySelector<HTMLElement>("[data-search-results]");
+const baseUrl = area?.dataset.searchBaseUrl;
 
 if (area && input && output) {
   let loading: Promise<void> | undefined;
@@ -131,6 +132,7 @@ if (area && input && output) {
       .then(({ attachSearch }) =>
         attachSearch({
           input,
+          ...(baseUrl ? { baseUrl } : {}),
           onResults(items) {
             output.replaceChildren(
               ...items.map((item) => {
@@ -167,6 +169,60 @@ public/search/cs/search-config.json
 ```
 
 Then pass locale-specific URLs:
+
+```ts
+attachSearch({
+  input,
+  baseUrl: `https://cdn.example.com/search/${locale}/`,
+  onResults,
+});
+```
+
+`baseUrl` controls where the browser loads `search-index.json` and `search-config.json` from. Without it, the default is `/search/`. Explicit `indexUrl` and `configUrl` override `baseUrl` when you need fully custom file names:
+
+```ts
+attachSearch({
+  input,
+  indexUrl: "https://cdn.example.com/assets/pacogames-index.abcd1234.json",
+  configUrl: "https://cdn.example.com/assets/pacogames-config.abcd1234.json",
+  onResults,
+});
+```
+
+If the generated `search-client.js` is also served from a CDN, lazy import that CDN URL too:
+
+```ts
+import("https://cdn.example.com/search/search-client.js").then(({ attachSearch }) =>
+  attachSearch({ input, baseUrl: "https://cdn.example.com/search/en/", onResults }),
+);
+```
+
+Or keep the client local and load only the data files from CDN:
+
+```ts
+import("/search/search-client.js").then(({ attachSearch }) =>
+  attachSearch({ input, baseUrl: "https://cdn.example.com/search/en/", onResults }),
+);
+```
+
+For multi-locale projects, use one shared client and separate data directories:
+
+```ts
+attachSearch({
+  input,
+  baseUrl: `/search/${locale}/`,
+  onResults,
+});
+```
+
+This loads:
+
+```text
+/search/{locale}/search-index.json
+/search/{locale}/search-config.json
+```
+
+You can still pass explicit locale-specific URLs if your deployment layout needs them:
 
 ```ts
 attachSearch({
@@ -312,7 +368,7 @@ heading-search-index \
 ```ts
 const activate = () => {
   loading ??= import("/search/search-client.js")
-    .then(({ attachSearch }) => attachSearch({ input, onResults }))
+    .then(({ attachSearch }) => attachSearch({ input, baseUrl: "/search/", onResults }))
     .then(() => undefined);
   return loading;
 };
@@ -320,7 +376,7 @@ const activate = () => {
 
 This is the same `search-client.js` described in the step-by-step guide above.
 
-`attachSearch` installs a debounced `input` listener, searches with field boosts and prefix matching, enables fuzzy matching from four characters, and returns a cleanup function. Its defaults are `/search/search-index.json`, `/search/search-config.json`, 150 ms debounce, and 10 results. See [`examples/lazy-search`](./examples/lazy-search) for the complete framework-independent example.
+`attachSearch` installs a debounced `input` listener, searches with field boosts and prefix matching, enables fuzzy matching from four characters, and returns a cleanup function. Its defaults are `baseUrl: "/search/"`, 150 ms debounce, and 10 results. See [`examples/lazy-search`](./examples/lazy-search) for the complete framework-independent example.
 
 For Next.js, put the same bootstrap in a client component. The dynamic import keeps both `heading-search-index/client` and MiniSearch out of the initial JavaScript chunk.
 

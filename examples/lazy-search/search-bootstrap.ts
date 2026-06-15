@@ -1,6 +1,7 @@
 const searchArea = document.querySelector<HTMLElement>("[data-search]");
 const input = searchArea?.querySelector<HTMLInputElement>("[data-search-input]");
 const results = searchArea?.querySelector<HTMLElement>("[data-search-results]");
+const baseUrl = searchArea?.dataset.searchBaseUrl;
 
 if (searchArea && input && results) {
   let loading: Promise<void> | undefined;
@@ -10,6 +11,7 @@ if (searchArea && input && results) {
       .then(({ attachSearch }) =>
         attachSearch({
           input,
+          ...(baseUrl ? { baseUrl } : {}),
           onResults(items) {
             results.replaceChildren(
               ...items.map((item) => {
