@@ -47,10 +47,10 @@ export async function attachSearch(options: SearchClientOptions): Promise<() => 
 export async function attachSearch(
   areaOrOptions: HTMLElement | SearchClientOptions,
 ): Promise<() => void> {
-  if (areaOrOptions instanceof HTMLElement) {
-    return attachSearchToElement(areaOrOptions);
+  if ("onResults" in areaOrOptions) {
+    return attachSearchWithOptions(areaOrOptions);
   }
-  return attachSearchWithOptions(areaOrOptions);
+  return attachSearchToElement(areaOrOptions as HTMLElement);
 }
 
 async function attachSearchToElement(area: HTMLElement): Promise<() => void> {
