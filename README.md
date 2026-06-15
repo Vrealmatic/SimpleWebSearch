@@ -1,6 +1,6 @@
 # heading-search-index
 
-Framework-independent Node.js 20+ tool that follows a sitemap tree, extracts page titles and `h1`-`h6` headings, and writes a browser-loadable MiniSearch index plus audit files. It reads server-rendered HTML only; it does not execute JavaScript.
+Framework-independent Node.js 20+ tool that follows a sitemap tree, extracts page titles and `h1`–`h6` headings, and writes a browser-loadable MiniSearch index plus audit files. It reads server-rendered HTML only; it does not execute JavaScript.
 
 - Try it live at [vrealmatic.com](https://vrealmatic.com/)
 
@@ -11,229 +11,11 @@ npm install --save-dev heading-search-index
 npx heading-search-index --sitemap https://example.com/sitemap.xml --output ./public/search
 ```
 
-```bash
-heading-search-index \
-  --sitemap https://example.com/sitemap.xml \
-  --output ./public/search \
-  --fields title,h1,h2,h3,h4,h5,h6 \
-  --include-selector main \
-  --exclude-selector "nav, footer, [data-search-ignore]" \
-  --concurrency 5 --timeout 15000 --stop-words en,custom-word --client --pretty --verbose
-```
+All options: `--sitemap`, `--output`, `--fields`, `--include-selector`, `--exclude-selector`, `--concurrency`, `--timeout`, `--base-url`, `--user-agent`, `--stop-words`, `--client`, `--config`, `--pretty`, `--verbose`. Sitemap and output are required unless supplied by a config file. CLI values override config values.
 
-Options are `--sitemap`, `--output`, `--fields`, `--include-selector`, `--exclude-selector`, `--concurrency`, `--timeout`, `--base-url`, `--user-agent`, `--stop-words`, `--client`, `--config`, `--pretty`, and `--verbose`. Sitemap and output are required unless supplied by a config file. CLI values override config values.
+`includeSelector` limits extraction to a page region (e.g. `main`). `excludeSelector` removes elements inside that region before extraction (e.g. breadcrumbs, sidebars, `[data-search-ignore]`).
 
-Use CLI flags for one-off generation. Use `heading-search.config.ts` when the command becomes long or repeated. `src/config.ts` is only internal package code that loads the config file, applies defaults, and lets CLI flags override the file.
-
-`includeSelector` and `excludeSelector` solve different problems. `includeSelector` chooses the page region to inspect, for example `main`. `excludeSelector` removes unwanted elements inside that region before extraction, for example breadcrumbs, sidebars, CTAs, or `[data-search-ignore]`.
-
-## Step-by-step implementation guide
-
-### 1. Install or build the tool
-
-In a consuming website project, install the package and run it with `npx`:
-
-```bash
-npm install --save-dev heading-search-index
-npx heading-search-index --help
-```
-
-When developing this package locally from the repository, build it first and run the compiled CLI:
-
-```bash
-npm install
-npm run build
-node dist/cli.js --help
-```
-
-### 2. Generate the search files
-
-For a simple static deployment, generate the browser client together with the data files:
-
-```bash
-npx heading-search-index \
-  --sitemap https://www.pacogames.com/sitemap/en \
-  --output ./public/search \
-  --fields h1 \
-  --stop-words en,free,game,games,play,online,html5,browser,paco,pacogames \
-  --client
-```
-
-If you are running from this repository before publishing the package, use the same flags with `node dist/cli.js`:
-
-```bash
-node dist/cli.js \
-  --sitemap https://www.pacogames.com/sitemap/en \
-  --output ./public/search \
-  --fields h1 \
-  --stop-words en,free,game,games,play,online,html5,browser,paco,pacogames \
-  --client
-```
-
-### 3. Check the generated output
-
-With `--output ./public/search --client`, the browser bundle is here:
-
-```text
-public/search/search-client.js
-```
-
-If `public/` is your web root, the browser URL is:
-
-```text
-/search/search-client.js
-```
-
-The generated directory contains:
-
-```text
-public/search/
-├── search-client.js
-├── search-index.json
-├── search-config.json
-├── search-documents.json
-└── search-report.json
-```
-
-For runtime search, deploy at least:
-
-```text
-/search/search-client.js
-/search/search-index.json
-/search/search-config.json
-```
-
-`search-documents.json` and `search-report.json` are useful for audits and debugging, but the browser client does not need them.
-
-### 4. Add HTML markup
-
-```html
-<div data-search data-search-base-url="/search/">
-  <input type="search" autocomplete="off" data-search-input />
-  <div data-search-results aria-live="polite"></div>
-</div>
-```
-
-### 5. Lazy-load the search client
-
-This small bootstrap can live in your normal site JavaScript. It preloads search on hover and also works for keyboard/touch users through `focus`:
-
-```ts
-const area = document.querySelector<HTMLElement>("[data-search]");
-const input = area?.querySelector<HTMLInputElement>("[data-search-input]");
-const output = area?.querySelector<HTMLElement>("[data-search-results]");
-const baseUrl = area?.dataset.searchBaseUrl;
-
-if (area && input && output) {
-  let loading: Promise<void> | undefined;
-
-  const activate = () => {
-    loading ??= import("/search/search-client.js")
-      .then(({ attachSearch }) =>
-        attachSearch({
-          input,
-          ...(baseUrl ? { baseUrl } : {}),
-          onResults(items) {
-            output.replaceChildren(
-              ...items.map((item) => {
-                const link = document.createElement("a");
-                link.href = String(item.id);
-                link.textContent = String(item.title);
-                return link;
-              }),
-            );
-          },
-        }),
-      )
-      .then(() => undefined);
-    return loading;
-  };
-
-  area.addEventListener("pointerenter", activate, { once: true });
-  input.addEventListener("focus", activate, { once: true });
-}
-```
-
-You do not need to run `esbuild` in the consuming website when `--client` is used. `search-client.js` is already a browser-ready ESM bundle and includes MiniSearch.
-
-### 6. Multi-locale layout
-
-Use one shared client and separate data files per locale:
-
-```text
-public/search/search-client.js
-public/search/en/search-index.json
-public/search/en/search-config.json
-public/search/cs/search-index.json
-public/search/cs/search-config.json
-```
-
-Then pass locale-specific URLs:
-
-```ts
-attachSearch({
-  input,
-  baseUrl: `https://cdn.example.com/search/${locale}/`,
-  onResults,
-});
-```
-
-`baseUrl` controls where the browser loads `search-index.json` and `search-config.json` from. Without it, the default is `/search/`. Explicit `indexUrl` and `configUrl` override `baseUrl` when you need fully custom file names:
-
-```ts
-attachSearch({
-  input,
-  indexUrl: "https://cdn.example.com/assets/pacogames-index.abcd1234.json",
-  configUrl: "https://cdn.example.com/assets/pacogames-config.abcd1234.json",
-  onResults,
-});
-```
-
-If the generated `search-client.js` is also served from a CDN, lazy import that CDN URL too:
-
-```ts
-import("https://cdn.example.com/search/search-client.js").then(({ attachSearch }) =>
-  attachSearch({ input, baseUrl: "https://cdn.example.com/search/en/", onResults }),
-);
-```
-
-Or keep the client local and load only the data files from CDN:
-
-```ts
-import("/search/search-client.js").then(({ attachSearch }) =>
-  attachSearch({ input, baseUrl: "https://cdn.example.com/search/en/", onResults }),
-);
-```
-
-For multi-locale projects, use one shared client and separate data directories:
-
-```ts
-attachSearch({
-  input,
-  baseUrl: `/search/${locale}/`,
-  onResults,
-});
-```
-
-This loads:
-
-```text
-/search/{locale}/search-index.json
-/search/{locale}/search-config.json
-```
-
-You can still pass explicit locale-specific URLs if your deployment layout needs them:
-
-```ts
-attachSearch({
-  input,
-  indexUrl: `/search/${locale}/search-index.json`,
-  configUrl: `/search/${locale}/search-config.json`,
-  onResults,
-});
-```
-
-The client can stay the same even when stop words differ by locale, because stop words are loaded from each locale's `search-config.json`.
+Add `--client` to also write a ready-to-serve browser ESM bundle (`search-client.js`) that includes MiniSearch. Without a bundler in the consuming site, this is the easiest deployment path.
 
 ## Configuration
 
@@ -262,19 +44,115 @@ export default {
 };
 ```
 
-Run it with `npx heading-search-index --config heading-search.config.ts`. By default only page URLs on the sitemap origin are indexed. Set `crawler.sameOrigin` to `false` to allow other origins.
+Run with `npx heading-search-index --config heading-search.config.ts`. `search.stopWords` accepts `"en"`, `"cs"`, comma-separated CLI additions (`--stop-words en,free,games`), or a config array (`["the", "and"]`). Stop words are applied at index-build time and baked into `search-config.json` so the browser client uses the same terms automatically.
 
-`search.fields` controls what is indexed. Use `--fields h1` when only page `h1` headings should be searchable. `search.stopWords` accepts the built-in `"en"` and `"cs"` presets, comma-separated CLI additions such as `--stop-words en,free,games`, or a custom config array such as `["the", "and", "company"]`. Stop words are removed while building the index and the generated client configuration applies the same term processor when loading and searching it.
+## Generated output
 
-Example for an English game site that should search only `h1` headings:
-
-```bash
-heading-search-index \
-  --sitemap https://www.pacogames.com/sitemap/en \
-  --output ./public/search/en \
-  --fields h1 \
-  --stop-words en,free,game,games,play,online,html5,browser
+```text
+public/search/
+├── search-client.js      ← written only with --client
+├── search-index.json     ← serialized MiniSearch index
+├── search-config.json    ← fields, boosts, search defaults
+├── search-documents.json ← readable audit data (not needed at runtime)
+└── search-report.json    ← timings, counts, failures
 ```
+
+Deploy at minimum `search-client.js`, `search-index.json`, and `search-config.json` as static assets. Generation writes to a temporary sibling directory and replaces the destination only after all files have been written successfully.
+
+## Browser integration
+
+### Markup
+
+Add a container with the required child elements. Attribute names on the container itself are arbitrary — the `data-*` below are only needed by the element-form API:
+
+```html
+<div data-site-search data-search-base-url="/search/">
+  <button type="button" data-search-trigger aria-label="Open search">…</button>
+  <input type="search" autocomplete="off" aria-label="Search" data-search-input />
+  <div data-search-results hidden aria-live="polite">
+    <p data-search-message></p>
+    <ul data-search-list></ul>
+  </div>
+</div>
+```
+
+### Lazy-load bootstrap
+
+Preloads on `pointerenter`; `focus` is the keyboard/touch fallback.
+
+**Element form** — pass the container directly; the client reads `data-search-base-url`, `data-empty-text`, and child elements automatically:
+
+```ts
+const searches = new WeakMap<HTMLElement, Promise<unknown>>();
+
+const activate = (area: HTMLElement) => {
+  let loading = searches.get(area);
+  if (loading) return loading;
+
+  loading = import("/search/search-client.js")
+    .then(({ attachSearch }) => attachSearch(area))
+    .catch((err) => {
+      console.error(err);
+      searches.delete(area);
+      const panel = area.querySelector("[data-search-results]");
+      const message = area.querySelector("[data-search-message]");
+      if (panel && message) {
+        message.textContent = area.dataset.errorText ?? "";
+        (panel as HTMLElement).hidden = false;
+      }
+    });
+
+  searches.set(area, loading);
+  return loading;
+};
+
+for (const area of document.querySelectorAll<HTMLElement>("[data-site-search]")) {
+  area.addEventListener("pointerenter", () => activate(area), { once: true });
+  area.querySelector("[data-search-input]")
+      ?.addEventListener("focus", () => activate(area), { once: true });
+}
+```
+
+**Options form** — pass an explicit options object for custom result rendering (e.g. when using a framework component):
+
+```ts
+import("/search/search-client.js").then(({ attachSearch }) =>
+  attachSearch({
+    input,
+    baseUrl: "/search/",
+    onResults(items) {
+      output.replaceChildren(
+        ...items.map((item) => {
+          const a = document.createElement("a");
+          a.href = String(item.id);
+          a.textContent = String(item.title);
+          return a;
+        }),
+      );
+    },
+  }),
+);
+```
+
+### Multi-locale
+
+Keep one shared `search-client.js` and generate separate data directories per locale:
+
+```text
+public/search/search-client.js
+public/search/en/search-index.json
+public/search/en/search-config.json
+public/search/cs/search-index.json
+public/search/cs/search-config.json
+```
+
+Set `data-search-base-url` per locale in the element form, or pass `baseUrl` in the options form:
+
+```ts
+attachSearch({ input, baseUrl: `/search/${locale}/`, onResults });
+```
+
+Stop words differ per locale but are baked into each `search-config.json`, so the client loads and applies them automatically. Use explicit `indexUrl` / `configUrl` only when your deployment layout requires non-standard file names.
 
 ## Node.js API
 
@@ -290,95 +168,6 @@ console.log(result.report);
 ```
 
 `generateSearchIndex` and all public option, document, weight, result, and report types are exported from the package root.
-
-## Output
-
-- `search-index.json`: serialized MiniSearch index.
-- `search-documents.json`: deterministic, readable audit data. It is not needed by the browser search.
-- `search-config.json`: fields, stored fields, boosts, and search defaults needed by the client.
-- `search-report.json`: timings, counts, missing headings, canonical duplicates, skips, and failures.
-- `search-client.js`: optional browser ESM bundle written when `--client` is used.
-
-Write the directory during the build and deploy it as static assets. Generation uses a temporary sibling directory and only replaces the destination after all four files have been written.
-
-## Lazy browser deployment
-
-The initial page only needs a small bootstrap listener. On the first `pointerenter` over the search area, it starts loading the client module before the user clicks. The `focus` listener is an accessibility and touch-device fallback.
-
-The lazy client then downloads:
-
-1. `search-index.json`, which contains the searchable index and stored `id` and `title` fields.
-2. `search-config.json`, which contains fields, boosts, prefix, and fuzzy settings.
-
-`search-documents.json` is intentionally not downloaded at runtime. It is a readable audit artifact; searching it directly would duplicate data and discard the prebuilt MiniSearch index.
-
-```html
-<div data-search>
-  <label for="site-search">Search</label>
-  <input id="site-search" type="search" autocomplete="off" data-search-input />
-  <div data-search-results aria-live="polite"></div>
-</div>
-```
-
-If the site has a bundler, the bootstrap can import the package client and let the bundler create the lazy chunk:
-
-```ts
-const area = document.querySelector<HTMLElement>("[data-search]");
-const input = area?.querySelector<HTMLInputElement>("[data-search-input]");
-const output = area?.querySelector<HTMLElement>("[data-search-results]");
-
-if (area && input && output) {
-  let loading: Promise<void> | undefined;
-
-  const activate = () => {
-    loading ??= import("heading-search-index/client")
-      .then(({ attachSearch }) =>
-        attachSearch({
-          input,
-          onResults(items) {
-            output.replaceChildren(
-              ...items.map((item) => {
-                const link = document.createElement("a");
-                link.href = String(item.id);
-                link.textContent = String(item.title);
-                return link;
-              }),
-            );
-          },
-        }),
-      )
-      .then(() => undefined);
-    return loading;
-  };
-
-  area.addEventListener("pointerenter", activate, { once: true });
-  input.addEventListener("focus", activate, { once: true });
-}
-```
-
-If the site does not bundle this TypeScript module, generate a ready-to-serve browser bundle with `--client` and import that static file instead:
-
-```bash
-heading-search-index \
-  --sitemap https://example.com/sitemap.xml \
-  --output ./public/search \
-  --client
-```
-
-```ts
-const activate = () => {
-  loading ??= import("/search/search-client.js")
-    .then(({ attachSearch }) => attachSearch({ input, baseUrl: "/search/", onResults }))
-    .then(() => undefined);
-  return loading;
-};
-```
-
-This is the same `search-client.js` described in the step-by-step guide above.
-
-`attachSearch` installs a debounced `input` listener, searches with field boosts and prefix matching, enables fuzzy matching from four characters, and returns a cleanup function. Its defaults are `baseUrl: "/search/"`, 150 ms debounce, and 10 results. See [`examples/lazy-search`](./examples/lazy-search) for the complete framework-independent example.
-
-For Next.js, put the same bootstrap in a client component. The dynamic import keeps both `heading-search-index/client` and MiniSearch out of the initial JavaScript chunk.
 
 ## Next.js / React example
 
@@ -397,7 +186,9 @@ export function SiteSearch() {
 
   function activate() {
     loading.current ??= import("heading-search-index/client")
-      .then(({ attachSearch }) => attachSearch({ input: input.current!, onResults: setResults }))
+      .then(({ attachSearch }) =>
+        attachSearch({ input: input.current!, onResults: setResults }),
+      )
       .then((detach) => {
         cleanup.current = detach;
       });
@@ -411,7 +202,6 @@ export function SiteSearch() {
         {results.map((result) => (
           <li key={result.id}>
             <a href={String(result.id)}>{String(result.title)}</a>
-            <small>{String(result.id)}</small>
           </li>
         ))}
       </ul>

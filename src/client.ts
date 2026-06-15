@@ -25,8 +25,100 @@ export interface SearchClientOptions {
   onError?: (error: Error) => void;
 }
 
-/** Load a generated index and attach debounced search behavior to an input. */
-export async function attachSearch(options: SearchClientOptions): Promise<() => void> {
+/**
+ * Attach debounced search to an input element (options form), or wire up a
+ * complete `[data-site-search]` container element (element form).
+ *
+ * **Element form** – pass the area element directly.  All configuration is
+ * read from `data-*` attributes and child selectors:
+ *
+ *   data-search-base-url   – base URL for resolveAssetUrls
+ *   data-empty-text        – message shown when query returns no results
+ *   [data-search-input]    – the <input> element (required)
+ *   [data-search-results]  – the results panel wrapper (required)
+ *   [data-search-message]  – inline message node (required)
+ *   [data-search-list]     – <ul> that receives result <li> items (required)
+ *   [data-search-trigger]  – button that focuses the input (optional)
+ *
+ * **Options form** – pass a `SearchClientOptions` object (original API).
+ */
+export async function attachSearch(area: HTMLElement): Promise<() => void>;
+export async function attachSearch(options: SearchClientOptions): Promise<() => void>;
+export async function attachSearch(
+  areaOrOptions: HTMLElement | SearchClientOptions,
+): Promise<() => void> {
+  if (areaOrOptions instanceof HTMLElement) {
+    return attachSearchToElement(areaOrOptions);
+  }
+  return attachSearchWithOptions(areaOrOptions);
+}
+
+async function attachSearchToElement(area: HTMLElement): Promise<() => void> {
+  const input = area.querySelector<HTMLInputElement>("[data-search-input]");
+  const panel = area.querySelector<HTMLElement>("[data-search-results]");
+  const message = area.querySelector<HTMLElement>("[data-search-message]");
+  const list = area.querySelector<HTMLElement>("[data-search-list]");
+  const trigger = area.querySelector<HTMLElement>("[data-search-trigger]");
+
+  if (!input || !panel || !message || !list) {
+    throw new Error(
+      "attachSearch: required child elements ([data-search-input], [data-search-results], " +
+        "[data-search-message], [data-search-list]) not found inside the area element.",
+    );
+  }
+
+  const emptyText = area.dataset.emptyText ?? "";
+
+  const onResults = (results: SearchResult[], query: string): void => {
+    list.innerHTML = "";
+    if (!query) {
+      panel.hidden = true;
+      return;
+    }
+    if (results.length === 0) {
+      message.textContent = emptyText;
+      message.hidden = false;
+      list.hidden = true;
+    } else {
+      message.textContent = "";
+      message.hidden = true;
+      list.hidden = false;
+      for (const result of results) {
+        const li = document.createElement("li");
+        const a = document.createElement("a");
+        a.href = String(result.id);
+        a.textContent = String(result.title ?? result.id);
+        li.appendChild(a);
+        list.appendChild(li);
+      }
+    }
+    panel.hidden = false;
+  };
+
+  const handleTrigger = (): void => input.focus();
+  trigger?.addEventListener("click", handleTrigger);
+
+  const handleFocusOut = (e: FocusEvent): void => {
+    if (!area.contains(e.relatedTarget as Node | null)) {
+      panel.hidden = true;
+    }
+  };
+  area.addEventListener("focusout", handleFocusOut);
+
+  const detach = await attachSearchWithOptions({
+    input,
+    baseUrl: area.dataset.searchBaseUrl,
+    onResults,
+  });
+
+  return () => {
+    detach();
+    trigger?.removeEventListener("click", handleTrigger);
+    area.removeEventListener("focusout", handleFocusOut);
+  };
+}
+
+async function attachSearchWithOptions(options: SearchClientOptions): Promise<() => void> {
   const urls = resolveAssetUrls(options);
   const [indexResponse, configResponse] = await Promise.all([
     fetch(urls.indexUrl),
