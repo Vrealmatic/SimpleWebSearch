@@ -1,8 +1,10 @@
-# heading-search-index
+# Simple Web Search / heading search index
 
 Framework-independent Node.js 20+ tool that follows a sitemap tree, extracts page titles and `h1`–`h6` headings, and writes a browser-loadable MiniSearch index plus audit files. It reads server-rendered HTML only; it does not execute JavaScript.
 
-- Try it live at [vrealmatic.com](https://vrealmatic.com/)
+- Try it live
+  - basic integration: [vrealmatic.com](https://vrealmatic.com/)
+  - integration with form fallback: [PacoGames.com](https://www.pacogames.com/)
 
 ## Installation and CLI
 
