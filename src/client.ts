@@ -87,7 +87,14 @@ async function attachSearchToElement(area: HTMLElement): Promise<() => void> {
         const li = document.createElement("li");
         const a = document.createElement("a");
         a.href = String(result.id);
-        a.textContent = String(result.title ?? result.id);
+
+        const title = document.createElement("span");
+        title.textContent = String(result.title ?? result.id);
+
+        const path = document.createElement("small");
+        path.textContent = String(result.id);
+
+        a.append(title, path);
         li.appendChild(a);
         list.appendChild(li);
       }

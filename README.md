@@ -236,6 +236,33 @@ export function SiteSearch() {
 }
 ```
 
+## Development
+
+Clone the repo and install dependencies, then build with [tsup](https://tsup.egoist.dev/):
+
+```bash
+npm install
+npm run build      # → dist/ (index.js, cli.js, and the browser bundle client.js)
+```
+
+`npm run build` compiles `src/` into `dist/`. The browser entry `src/client.ts` is bundled into `dist/client.js` with MiniSearch inlined (`noExternal: ["minisearch"]`), so the result is a self-contained ESM file that needs no further bundling on the consuming site.
+
+Other scripts: `npm test` (Vitest), `npm run typecheck`, `npm run lint`, `npm run format`.
+
+### Updating the deployed browser client
+
+`search-client.js` shipped to a site is just a copy of `dist/client.js`. After changing `src/client.ts` (for example the result markup in `attachSearch`), regenerate and redeploy it:
+
+```bash
+npm run build
+# then either re-run the CLI with --client to emit a fresh search-client.js…
+npx heading-search-index --sitemap https://example.com/sitemap.xml --output ./public/search --client
+# …or just copy the rebuilt bundle directly:
+cp dist/client.js ./public/search/search-client.js
+```
+
+Editing `src/client.ts` alone changes nothing served — the bundle must be rebuilt. Replacing `search-client.js` is sufficient only if the site loads this bundle and calls `attachSearch`; a site using its own custom render function must update that script instead.
+
 ## Behavior and limitations
 
 Sitemap indexes are followed recursively with cycle protection, URL deduplication, namespace support, relative URL resolution, and gzip support. Individual page errors are recorded without stopping other pages. `noindex` pages are skipped by default. Canonical links define document IDs. IDs on the sitemap origin are relative paths by default; IDs on other origins remain absolute to avoid collisions. Set `crawler.absoluteIds` to `true` to retain absolute IDs everywhere.
