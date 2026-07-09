@@ -16,6 +16,7 @@ const program = new Command()
   .addOption(new Option("--timeout <milliseconds>").argParser(Number))
   .option("--base-url <url>")
   .option("--user-agent <value>")
+  .option("--hreflang <code>", "index only sitemap alternates for this language, for example: cs")
   .option("--stop-words <words>", "preset or comma-separated words, for example: en,free,games")
   .option("--config <path>")
   .option("--client", "also write a browser ESM bundle as search-client.js")
@@ -40,6 +41,7 @@ async function main(): Promise<void> {
       ...(flags.concurrency !== undefined ? { concurrency: flags.concurrency } : {}),
       ...(flags.timeout !== undefined ? { timeout: flags.timeout } : {}),
       ...(flags.userAgent ? { userAgent: flags.userAgent } : {}),
+      ...(flags.hreflang ? { hreflang: flags.hreflang } : {}),
     },
     ...(flags.fields || flags.stopWords
       ? {
@@ -53,7 +55,6 @@ async function main(): Promise<void> {
   const options = mergeOptions(configured, cli);
   if (!options.sitemap || !options.output)
     throw new Error("--sitemap and --output are required unless provided by --config");
-  if ((options.crawler?.concurrency ?? 5) < 1) throw new Error("--concurrency must be at least 1");
   const result = await generateSearchIndex(options);
   console.log(
     `Indexed ${result.report.indexedUrls}/${result.report.discoveredUrls} pages into ${result.output}`,

@@ -25,6 +25,12 @@ export async function loadConfig(path: string): Promise<GeneratorOptions> {
 export function resolveOptions(options: GeneratorOptions): ResolvedOptions {
   if (!options.sitemap) throw new Error("A sitemap URL is required");
   if (!options.output) throw new Error("An output directory is required");
+  const concurrency = options.crawler?.concurrency ?? 5;
+  if (!Number.isInteger(concurrency) || concurrency < 1)
+    throw new Error("crawler.concurrency must be a positive integer");
+  const timeout = options.crawler?.timeout ?? 15_000;
+  if (!Number.isFinite(timeout) || timeout <= 0)
+    throw new Error("crawler.timeout must be a positive number of milliseconds");
   const excluded = options.crawler?.excludeSelector ?? [
     "nav",
     "footer",
@@ -38,8 +44,8 @@ export function resolveOptions(options: GeneratorOptions): ResolvedOptions {
     sitemap: new URL(options.sitemap, options.baseUrl).href,
     output: resolve(options.output),
     crawler: {
-      concurrency: options.crawler?.concurrency ?? 5,
-      timeout: options.crawler?.timeout ?? 15_000,
+      concurrency,
+      timeout,
       includeSelector: options.crawler?.includeSelector ?? "body",
       excludeSelector: Array.isArray(excluded) ? excluded.join(", ") : excluded,
       sameOrigin: options.crawler?.sameOrigin ?? true,
@@ -47,6 +53,7 @@ export function resolveOptions(options: GeneratorOptions): ResolvedOptions {
       absoluteIds: options.crawler?.absoluteIds ?? false,
       skipNoindex: options.crawler?.skipNoindex ?? true,
       userAgent: options.crawler?.userAgent ?? "heading-search-index/0.1",
+      ...(options.crawler?.hreflang ? { hreflang: options.crawler.hreflang } : {}),
     },
     weights: { ...defaultWeights, ...options.weights },
     search: {

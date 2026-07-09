@@ -3,7 +3,7 @@ import type { SearchDocument } from "../types.js";
 
 export interface ExtractionResult {
   document?: SearchDocument;
-  skipped?: "noindex";
+  skipped?: "noindex" | "non-html";
   usedFallbackTitle: boolean;
   missingH1: boolean;
 }
@@ -28,10 +28,8 @@ export function extractHeadings(
 ): ExtractionResult {
   const $ = cheerio.load(html);
   const robots = $("meta[name='robots' i]").attr("content") ?? "";
-  if (
-    options.skipNoindex &&
-    robots.split(",").some((part) => part.trim().toLowerCase() === "noindex")
-  ) {
+  const directives = robots.split(",").map((part) => part.trim().toLowerCase());
+  if (options.skipNoindex && directives.some((part) => part === "noindex" || part === "none")) {
     return { skipped: "noindex", usedFallbackTitle: false, missingH1: false };
   }
   const scope = $(options.includeSelector);

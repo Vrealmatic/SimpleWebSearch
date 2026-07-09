@@ -1,3 +1,5 @@
+import type { StopWordsInput } from "./types.js";
+
 export const englishStopWords = [
   "a",
   "about",
@@ -231,7 +233,7 @@ export const czechStopWords = [
   "že",
 ] as const;
 
-export function resolveStopWords(value: string | string[] | undefined): string[] {
+export function resolveStopWords(value: StopWordsInput | undefined): string[] {
   const input = typeof value === "string" ? value.split(",") : (value ?? []);
   const words = input.flatMap((word) => {
     const normalized = word.trim().toLowerCase();
@@ -239,7 +241,7 @@ export function resolveStopWords(value: string | string[] | undefined): string[]
     if (normalized === "cs") return czechStopWords;
     return normalized ? [normalized] : [];
   });
-  return [...new Set(words.map((word) => word.trim().toLowerCase()).filter(Boolean))].sort();
+  return [...new Set<string>(words)].sort();
 }
 
 export function createTermProcessor(stopWords: readonly string[]): (term: string) => string | null {

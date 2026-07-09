@@ -31,10 +31,11 @@ export async function crawlPages(urls: string[], options: ResolvedOptions): Prom
           if (result.usedFallbackTitle) withoutTitle.push(url);
           if (result.missingH1) withoutH1.push(url);
           if (options.verbose) console.log(`Indexed ${url}`);
-        } catch (error: any) {
+        } catch (error) {
+          const status = (error as { status?: unknown } | null | undefined)?.status;
           failures.push({
             url,
-            ...(typeof error?.status === "number" ? { status: error.status } : {}),
+            ...(typeof status === "number" ? { status } : {}),
             message: error instanceof Error ? error.message : String(error),
           });
         }

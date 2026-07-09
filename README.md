@@ -13,9 +13,11 @@ npm install --save-dev heading-search-index
 npx heading-search-index --sitemap https://example.com/sitemap.xml --output ./public/search
 ```
 
-All options: `--sitemap`, `--output`, `--fields`, `--include-selector`, `--exclude-selector`, `--concurrency`, `--timeout`, `--base-url`, `--user-agent`, `--stop-words`, `--client`, `--config`, `--pretty`, `--verbose`. Sitemap and output are required unless supplied by a config file. CLI values override config values.
+All options: `--sitemap`, `--output`, `--fields`, `--include-selector`, `--exclude-selector`, `--concurrency`, `--timeout`, `--base-url`, `--user-agent`, `--hreflang`, `--stop-words`, `--client`, `--config`, `--pretty`, `--verbose`. Sitemap and output are required unless supplied by a config file. CLI values override config values.
 
 `includeSelector` limits extraction to a page region (e.g. `main`). `excludeSelector` removes elements inside that region before extraction (e.g. breadcrumbs, sidebars, `[data-search-ignore]`).
+
+For multilingual sitemaps with `xhtml:link rel="alternate"` annotations, `--hreflang` (or `crawler.hreflang` in config) keeps only the alternate URL matching the given language (e.g. `cs`, `en`, `x-default`); entries without a matching alternate are skipped. To build one index per language, run the generator once per language over the same sitemap with different `--hreflang` and `--output` values. Without the option, alternates are ignored and every `<loc>` is indexed as before.
 
 Add `--client` to also write a ready-to-serve browser ESM bundle (`search-client.js`) that includes MiniSearch. Without a bundler in the consuming site, this is the easiest deployment path.
 
@@ -265,6 +267,6 @@ Editing `src/client.ts` alone changes nothing served — the bundle must be rebu
 
 ## Behavior and limitations
 
-Sitemap indexes are followed recursively with cycle protection, URL deduplication, namespace support, relative URL resolution, and gzip support. Individual page errors are recorded without stopping other pages. `noindex` pages are skipped by default. Canonical links define document IDs. IDs on the sitemap origin are relative paths by default; IDs on other origins remain absolute to avoid collisions. Set `crawler.absoluteIds` to `true` to retain absolute IDs everywhere.
+Sitemap indexes are followed recursively with cycle protection, URL deduplication, namespace support, relative URL resolution, and gzip support. Individual page errors are recorded without stopping other pages. `noindex` pages are skipped by default. URLs that respond with a non-HTML content type (for example PDFs listed in the sitemap) are counted as skipped, not indexed. Canonical links define document IDs. IDs on the sitemap origin are relative paths by default; IDs on other origins remain absolute to avoid collisions. Set `crawler.absoluteIds` to `true` to retain absolute IDs everywhere.
 
 Only HTML returned by the server is indexed. Headings rendered exclusively in the browser by client JavaScript are unavailable; render important content through SSR or static generation. This tool does not interpret `robots.txt`, execute JavaScript, or crawl links outside the sitemap.

@@ -40,6 +40,23 @@ describe("page crawling", () => {
     vi.unstubAllGlobals();
   });
 
+  it("skips resources with a non-HTML content type", async () => {
+    vi.stubGlobal(
+      "fetch",
+      vi.fn(
+        async () =>
+          new Response("%PDF-1.7", {
+            status: 200,
+            headers: { "content-type": "application/pdf" },
+          }),
+      ),
+    );
+    const result = await crawlPage("https://example.com/file.pdf", base());
+    expect(result.skipped).toBe("non-html");
+    expect(result.document).toBeUndefined();
+    vi.unstubAllGlobals();
+  });
+
   it("uses relative IDs locally and absolute IDs for another origin", async () => {
     vi.stubGlobal(
       "fetch",

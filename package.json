@@ -9,6 +9,7 @@
   },
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "sideEffects": ["./dist/cli.js"],
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",

@@ -1,35 +1,32 @@
 import { gunzipSync } from "node:zlib";
+import { fetchResource } from "../http.js";
 import { parseSitemap } from "./parse-sitemap.js";
 
 interface SitemapFetchOptions {
   timeout: number;
   userAgent: string;
   sameOrigin: boolean;
+  /** Keep only URLs whose xhtml:link alternate matches this hreflang (e.g. "cs", "x-default"). */
+  hreflang?: string;
+}
+
+function isGzip(body: Buffer): boolean {
+  return body[0] === 0x1f && body[1] === 0x8b;
 }
 
 async function fetchText(url: string, options: SitemapFetchOptions): Promise<string> {
-  const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), options.timeout);
   try {
-    const response = await fetch(url, {
-      headers: { "user-agent": options.userAgent },
-      signal: controller.signal,
+    const resource = await fetchResource(url, {
+      timeout: options.timeout,
+      userAgent: options.userAgent,
     });
-    if (!response.ok) throw new Error(`HTTP ${response.status} ${response.statusText}`);
-    const bytes = Buffer.from(await response.arrayBuffer());
-    const gzip =
-      url.toLowerCase().endsWith(".gz") || response.headers.get("content-type")?.includes("gzip");
-    return (gzip ? gunzipSync(bytes) : bytes).toString("utf8");
+    if (!resource.ok) throw new Error(`HTTP ${resource.status} ${resource.statusText}`);
+    // Detect gzip by magic bytes; transparently encoded responses arrive already decompressed.
+    return (isGzip(resource.body) ? gunzipSync(resource.body) : resource.body).toString("utf8");
   } catch (error) {
-    const reason =
-      error instanceof Error && error.name === "AbortError"
-        ? `timed out after ${options.timeout}ms`
-        : error instanceof Error
-          ? error.message
-          : String(error);
-    throw new Error(`Unable to load sitemap ${url}: ${reason}`);
-  } finally {
-    clearTimeout(timer);
+    throw new Error(
+      `Unable to load sitemap ${url}: ${error instanceof Error ? error.message : String(error)}`,
+    );
   }
 }
 
@@ -45,7 +42,7 @@ export async function discoverUrls(
     const current = pending.shift()!;
     if (visited.has(current)) continue;
     visited.add(current);
-    const parsed = parseSitemap(await fetchText(current, options), current);
+    const parsed = parseSitemap(await fetchText(current, options), current, options.hreflang);
     if (parsed.type === "index") {
       for (const child of parsed.locations.sort()) if (!visited.has(child)) pending.push(child);
       continue;

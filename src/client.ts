@@ -40,6 +40,10 @@ export interface SearchClientOptions {
  *   [data-search-list]     – <ul> that receives result <li> items (required)
  *   [data-search-trigger]  – button that focuses the input (optional)
  *
+ * When the input belongs to a `<form>` (progressive-enhancement fallback),
+ * submit events are intercepted once the client is active. If the input has
+ * an `aria-expanded` attribute, it is kept in sync with panel visibility.
+ *
  * **Options form** – pass a `SearchClientOptions` object (original API).
  */
 export async function attachSearch(area: HTMLElement): Promise<() => void>;
@@ -68,11 +72,17 @@ async function attachSearchToElement(area: HTMLElement): Promise<() => void> {
   }
 
   const emptyText = area.dataset.emptyText ?? "";
+  const hasExpandedAttribute = input.hasAttribute("aria-expanded");
+
+  const setPanelHidden = (hidden: boolean): void => {
+    panel.hidden = hidden;
+    if (hasExpandedAttribute) input.setAttribute("aria-expanded", String(!hidden));
+  };
 
   const onResults = (results: SearchResult[], query: string): void => {
     list.innerHTML = "";
     if (!query) {
-      panel.hidden = true;
+      setPanelHidden(true);
       return;
     }
     if (results.length === 0) {
@@ -99,18 +109,18 @@ async function attachSearchToElement(area: HTMLElement): Promise<() => void> {
         list.appendChild(li);
       }
     }
-    panel.hidden = false;
+    setPanelHidden(false);
   };
 
   const handleTrigger = (): void => input.focus();
-  trigger?.addEventListener("click", handleTrigger);
-
+  // With the client active, searching is live; keep the form as a no-JavaScript fallback only.
+  const form = input.form;
+  const handleSubmit = (event: SubmitEvent): void => event.preventDefault();
   const handleFocusOut = (e: FocusEvent): void => {
     if (!area.contains(e.relatedTarget as Node | null)) {
-      panel.hidden = true;
+      setPanelHidden(true);
     }
   };
-  area.addEventListener("focusout", handleFocusOut);
 
   const detach = await attachSearchWithOptions({
     input,
@@ -120,9 +130,14 @@ async function attachSearchToElement(area: HTMLElement): Promise<() => void> {
     onResults,
   });
 
+  trigger?.addEventListener("click", handleTrigger);
+  form?.addEventListener("submit", handleSubmit);
+  area.addEventListener("focusout", handleFocusOut);
+
   return () => {
     detach();
     trigger?.removeEventListener("click", handleTrigger);
+    form?.removeEventListener("submit", handleSubmit);
     area.removeEventListener("focusout", handleFocusOut);
   };
 }
