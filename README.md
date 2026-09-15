@@ -13,11 +13,25 @@ npm install --save-dev heading-search-index
 npx heading-search-index --sitemap https://example.com/sitemap.xml --output ./public/search
 ```
 
-All options: `--sitemap`, `--output`, `--fields`, `--include-selector`, `--exclude-selector`, `--concurrency`, `--timeout`, `--base-url`, `--user-agent`, `--hreflang`, `--no-skip-noindex`, `--stop-words`, `--no-client`, `--config`, `--pretty`, `--verbose`. Sitemap and output are required unless supplied by a config file. CLI values override config values.
+All options: `--sitemap`, `--output`, `--fields`, `--include-selector`, `--exclude-selector`, `--concurrency`, `--timeout`, `--base-url`, `--user-agent`, `--hreflang`, `--crawl-origin`, `--no-skip-noindex`, `--stop-words`, `--no-client`, `--config`, `--pretty`, `--verbose`. Sitemap and output are required unless supplied by a config file. CLI values override config values.
 
 `includeSelector` limits extraction to a page region (e.g. `main`). `excludeSelector` removes elements inside that region before extraction (e.g. breadcrumbs, sidebars, `[data-search-ignore]`).
 
 For multilingual sitemaps with `xhtml:link rel="alternate"` annotations, `--hreflang` (or `crawler.hreflang` in config) keeps only the alternate URL matching the given language (e.g. `cs`, `en`, `x-default`); entries without a matching alternate are skipped. To build one index per language, run the generator once per language over the same sitemap with different `--hreflang` and `--output` values. Without the option, alternates are ignored and every `<loc>` is indexed as before.
+
+### Indexing a local dev server
+
+A dev server usually renders its sitemap with production URLs, so pointing `--sitemap` at `localhost` finds nothing: every entry is discarded by the same-origin filter. `--crawl-origin` (or `crawler.crawlOrigin` in config) moves the URLs found inside the sitemap — including nested sitemap indexes — onto the given origin, keeping path, query, and hash. Only what the sitemap contains is moved; `--sitemap` itself is fetched exactly as given.
+
+```bash
+npx heading-search-index \
+  --sitemap http://localhost:3000/sitemap.xml \
+  --crawl-origin http://localhost:3000 \
+  --base-url https://example.com \
+  --output ./public/search
+```
+
+This crawls the dev server while `--base-url` keeps document IDs relative: pages served locally normally still emit a production `<link rel="canonical">`, and IDs are shortened to a path only when they sit on the base URL's origin. Without `--base-url`, the canonical wins and IDs stay absolute production URLs — still usable, just longer. The point of the combination is being able to index pages that exist locally but are not deployed yet, and ship the generated files in the same deploy as the pages themselves.
 
 Pages carrying a robots `noindex` meta tag are skipped by default; pass `--no-skip-noindex` (or set `crawler.skipNoindex: false` in config) to index them anyway, which is what you want on a staging or pre-launch site.
 
@@ -39,6 +53,7 @@ export default {
     useCanonical: true,
     absoluteIds: false,
     skipNoindex: true,
+    // crawlOrigin: "http://localhost:3000",
   },
   search: {
     fields: ["title", "h1", "h2", "h3", "h4", "h5", "h6"],
@@ -269,6 +284,6 @@ Editing `src/client.ts` alone changes nothing served — the bundle must be rebu
 
 ## Behavior and limitations
 
-Sitemap indexes are followed recursively with cycle protection, URL deduplication, namespace support, relative URL resolution, and gzip support. Individual page errors are recorded without stopping other pages. `noindex` pages are skipped by default. URLs that respond with a non-HTML content type (for example PDFs listed in the sitemap) are counted as skipped, not indexed. Canonical links define document IDs. IDs on the sitemap origin are relative paths by default; IDs on other origins remain absolute to avoid collisions. Set `crawler.absoluteIds` to `true` to retain absolute IDs everywhere.
+Sitemap indexes are followed recursively with cycle protection, URL deduplication, namespace support, relative URL resolution, and gzip support. Individual page errors are recorded without stopping other pages. `noindex` pages are skipped by default. URLs that respond with a non-HTML content type (for example PDFs listed in the sitemap) are counted as skipped, not indexed. Canonical links define document IDs. IDs on the reference origin — `baseUrl` when set, otherwise the sitemap's origin — are relative paths by default; IDs on other origins remain absolute to avoid collisions. Set `crawler.absoluteIds` to `true` to retain absolute IDs everywhere.
 
 Only HTML returned by the server is indexed. Headings rendered exclusively in the browser by client JavaScript are unavailable; render important content through SSR or static generation. This tool does not interpret `robots.txt`, execute JavaScript, or crawl links outside the sitemap.

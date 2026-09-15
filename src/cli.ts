@@ -17,6 +17,10 @@ const program = new Command()
   .option("--base-url <url>")
   .option("--user-agent <value>")
   .option("--hreflang <code>", "index only sitemap alternates for this language, for example: cs")
+  .option(
+    "--crawl-origin <url>",
+    "fetch the sitemap's URLs from this origin instead, for example: http://localhost:3000",
+  )
   .option("--no-skip-noindex", "index pages even if they carry a robots noindex meta tag")
   .option("--stop-words <words>", "preset or comma-separated words, for example: en,free,games")
   .option("--config <path>")
@@ -45,6 +49,7 @@ async function main(): Promise<void> {
       ...(flags.timeout !== undefined ? { timeout: flags.timeout } : {}),
       ...(flags.userAgent ? { userAgent: flags.userAgent } : {}),
       ...(flags.hreflang ? { hreflang: flags.hreflang } : {}),
+      ...(flags.crawlOrigin ? { crawlOrigin: flags.crawlOrigin } : {}),
       // commander defaults a --no-x flag to true, so only an explicit false is a real
       // CLI opt-out; testing truthiness here would always override crawler.skipNoindex
       // coming from the config file.

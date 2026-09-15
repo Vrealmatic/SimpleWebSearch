@@ -8,6 +8,19 @@ interface SitemapFetchOptions {
   sameOrigin: boolean;
   /** Keep only URLs whose xhtml:link alternate matches this hreflang (e.g. "cs", "x-default"). */
   hreflang?: string;
+  /** Move URLs found inside the sitemap onto this origin before fetching them. */
+  crawlOrigin?: string;
+}
+
+/**
+ * Move a URL onto `origin`, keeping its path, query, and hash. A dev server usually renders
+ * its sitemap with production URLs, so without this the same-origin filter would discard
+ * every entry.
+ */
+function toCrawlOrigin(location: string, origin?: string): string {
+  if (!origin) return location;
+  const url = new URL(location);
+  return new URL(`${url.pathname}${url.search}${url.hash}`, origin).href;
 }
 
 function isGzip(body: Buffer): boolean {
@@ -37,18 +50,20 @@ export async function discoverUrls(
   const pending = [sitemapUrl];
   const visited = new Set<string>();
   const pages = new Set<string>();
-  const origin = new URL(sitemapUrl).origin;
+  const origin = options.crawlOrigin ?? new URL(sitemapUrl).origin;
   while (pending.length) {
     const current = pending.shift()!;
     if (visited.has(current)) continue;
     visited.add(current);
     const parsed = parseSitemap(await fetchText(current, options), current, options.hreflang);
     if (parsed.type === "index") {
-      for (const child of parsed.locations.sort()) if (!visited.has(child)) pending.push(child);
+      // Nested sitemaps are listed with production URLs too, so they move as well.
+      for (const child of parsed.locations.map((l) => toCrawlOrigin(l, options.crawlOrigin)).sort())
+        if (!visited.has(child)) pending.push(child);
       continue;
     }
     for (const location of parsed.locations) {
-      const url = new URL(location);
+      const url = new URL(toCrawlOrigin(location, options.crawlOrigin));
       if (
         (url.protocol === "http:" || url.protocol === "https:") &&
         (!options.sameOrigin || url.origin === origin)

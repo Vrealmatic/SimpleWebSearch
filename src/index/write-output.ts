@@ -33,7 +33,16 @@ export async function writeOutput(
       writeFile(join(temporary, "search-report.json"), JSON.stringify(report, null, space)),
     ]);
     if (options.client) {
-      await copyFile(new URL("./client.js", import.meta.url), join(temporary, "search-client.js"));
+      // The bundle sits next to this module in dist/; running from src/ (tests, jiti) has none.
+      const bundle = new URL("./client.js", import.meta.url);
+      try {
+        await copyFile(bundle, join(temporary, "search-client.js"));
+      } catch (error) {
+        if ((error as { code?: unknown } | null | undefined)?.code !== "ENOENT") throw error;
+        throw new Error(
+          `browser bundle not found at ${bundle.href} — run "npm run build", or set client: false to skip it`,
+        );
+      }
     }
     await rm(options.output, { recursive: true, force: true });
     await rename(temporary, options.output);

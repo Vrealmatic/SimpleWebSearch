@@ -68,6 +68,23 @@ describe("MiniSearch index", () => {
     expect(loaded.search("Arcade").map((result) => result.id)).toEqual(["/h1"]);
   });
 
+  it("normalizes crawlOrigin and rejects unusable values", () => {
+    const base = { sitemap: "https://example.com/sitemap.xml", output: "out" };
+    expect(
+      resolveOptions({ ...base, crawler: { crawlOrigin: "http://localhost:3000/ignored" } }).crawler
+        .crawlOrigin,
+    ).toBe("http://localhost:3000");
+    expect(resolveOptions(base).crawler.crawlOrigin).toBeUndefined();
+    expect(() => resolveOptions({ ...base, crawler: { crawlOrigin: "//localhost:3000" } })).toThrow(
+      "absolute http(s) URL",
+    );
+    // "localhost:3000" parses as a URL with scheme "localhost", which is not something to fetch.
+    for (const value of ["localhost:3000", "file:///tmp/site"])
+      expect(() => resolveOptions({ ...base, crawler: { crawlOrigin: value } })).toThrow(
+        "http or https",
+      );
+  });
+
   it("supports the Czech stop-word preset", () => {
     const options = resolveOptions({
       sitemap: "https://example.com/sitemap.xml",

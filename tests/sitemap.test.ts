@@ -96,6 +96,35 @@ describe("sitemaps", () => {
     vi.unstubAllGlobals();
   });
 
+  it("moves sitemap URLs onto crawlOrigin, including nested sitemaps", async () => {
+    // A dev server renders its sitemap with production URLs; crawlOrigin points them back home.
+    const responses: Record<string, string> = {
+      "http://localhost:3000/sitemap.xml": `<sitemapindex><sitemap><loc>https://example.com/pages.xml</loc></sitemap></sitemapindex>`,
+      "http://localhost:3000/pages.xml": `<urlset>
+        <url><loc>https://example.com/a</loc><xhtml:link rel="alternate" hreflang="cs" href="https://example.com/a"/><xhtml:link rel="alternate" hreflang="sk" href="https://example.com/sk/a?x=1"/></url>
+        <url><loc>https://example.com/b</loc><xhtml:link rel="alternate" hreflang="sk" href="https://example.com/sk/b"/></url>
+      </urlset>`,
+    };
+    vi.stubGlobal(
+      "fetch",
+      vi.fn(
+        async (input: string | URL | Request) =>
+          new Response(responses[String(input)], { status: 200 }),
+      ),
+    );
+    await expect(
+      discoverUrls("http://localhost:3000/sitemap.xml", {
+        timeout: 1000,
+        userAgent: "test",
+        sameOrigin: true,
+        hreflang: "sk",
+        crawlOrigin: "http://localhost:3000",
+      }),
+    ).resolves.toEqual(["http://localhost:3000/sk/a?x=1", "http://localhost:3000/sk/b"]);
+    expect(fetch).toHaveBeenCalledTimes(2);
+    vi.unstubAllGlobals();
+  });
+
   it("rejects invalid sitemap XML", () => {
     expect(() => parseSitemap("<html></html>", "https://example.com/sitemap.xml")).toThrow(
       "expected urlset or sitemapindex",

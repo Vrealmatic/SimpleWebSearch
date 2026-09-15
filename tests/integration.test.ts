@@ -1,4 +1,4 @@
-import { mkdtemp, readFile } from "node:fs/promises";
+import { access, mkdtemp, readFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { afterEach, describe, expect, it, vi } from "vitest";
@@ -25,6 +25,9 @@ describe("generation", () => {
       sitemap: "https://example.com/sitemap.xml",
       output,
       pretty: true,
+      // writeOutput copies the browser bundle from next to itself, which only exists once
+      // tsup has emitted dist/. Tests run against src/, so the copy is switched off here.
+      client: false,
       crawler: { includeSelector: "main" },
       search: { fields: ["h1"] },
     });
@@ -37,6 +40,7 @@ describe("generation", () => {
     ]) {
       expect(JSON.parse(await readFile(join(output, name), "utf8"))).toBeTruthy();
     }
+    await expect(access(join(output, "search-client.js"))).rejects.toThrow();
     await expect(
       readFile(join(output, "search-config.json"), "utf8").then(JSON.parse),
     ).resolves.toMatchObject({

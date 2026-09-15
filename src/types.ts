@@ -37,6 +37,12 @@ export interface GeneratorOptions {
     userAgent?: string;
     /** Keep only sitemap URLs whose xhtml:link alternate matches this hreflang (e.g. "cs"). */
     hreflang?: string;
+    /**
+     * Fetch the URLs found inside the sitemap from this origin instead of the one they name
+     * (e.g. "http://localhost:3000"), keeping their path, query, and hash. Lets a local dev
+     * server be indexed from a sitemap that already lists production URLs.
+     */
+    crawlOrigin?: string;
   };
   weights?: Partial<SearchWeights>;
   search?: {
@@ -65,6 +71,7 @@ export interface ResolvedOptions {
     skipNoindex: boolean;
     userAgent: string;
     hreflang?: string;
+    crawlOrigin?: string;
   };
   weights: SearchWeights;
   search: {

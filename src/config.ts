@@ -31,6 +31,9 @@ export function resolveOptions(options: GeneratorOptions): ResolvedOptions {
   const timeout = options.crawler?.timeout ?? 15_000;
   if (!Number.isFinite(timeout) || timeout <= 0)
     throw new Error("crawler.timeout must be a positive number of milliseconds");
+  const crawlOrigin = options.crawler?.crawlOrigin
+    ? resolveOrigin(options.crawler.crawlOrigin)
+    : undefined;
   const excluded = options.crawler?.excludeSelector ?? [
     "nav",
     "footer",
@@ -54,6 +57,7 @@ export function resolveOptions(options: GeneratorOptions): ResolvedOptions {
       skipNoindex: options.crawler?.skipNoindex ?? true,
       userAgent: options.crawler?.userAgent ?? "heading-search-index/0.1",
       ...(options.crawler?.hreflang ? { hreflang: options.crawler.hreflang } : {}),
+      ...(crawlOrigin ? { crawlOrigin } : {}),
     },
     weights: { ...defaultWeights, ...options.weights },
     search: {
@@ -67,6 +71,21 @@ export function resolveOptions(options: GeneratorOptions): ResolvedOptions {
     pretty: options.pretty ?? false,
     verbose: options.verbose ?? false,
   };
+}
+
+/** Reduce a user-supplied origin to a bare `scheme://host:port`, rejecting anything unusable. */
+function resolveOrigin(value: string): string {
+  let url: URL;
+  try {
+    url = new URL(value);
+  } catch {
+    throw new Error(
+      "crawler.crawlOrigin must be an absolute http(s) URL, for example: http://localhost:3000",
+    );
+  }
+  if (url.protocol !== "http:" && url.protocol !== "https:")
+    throw new Error(`crawler.crawlOrigin must use http or https, received "${value}"`);
+  return url.origin;
 }
 
 export function resolveFields(fields: SearchField[] | undefined): SearchField[] {
