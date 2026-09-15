@@ -17,9 +17,10 @@ const program = new Command()
   .option("--base-url <url>")
   .option("--user-agent <value>")
   .option("--hreflang <code>", "index only sitemap alternates for this language, for example: cs")
+  .option("--no-skip-noindex", "index pages even if they carry a robots noindex meta tag")
   .option("--stop-words <words>", "preset or comma-separated words, for example: en,free,games")
   .option("--config <path>")
-  .option("--client", "also write a browser ESM bundle as search-client.js")
+  .option("--no-client", "skip the browser ESM bundle; import heading-search-index/client instead")
   .option("--pretty")
   .option("--verbose");
 
@@ -32,7 +33,9 @@ async function main(): Promise<void> {
     ...(flags.sitemap ? { sitemap: flags.sitemap } : {}),
     ...(flags.output ? { output: flags.output } : {}),
     ...(flags.baseUrl ? { baseUrl: flags.baseUrl } : {}),
-    ...(flags.client ? { client: true } : {}),
+    // commander defaults a --no-x flag to true, so only an explicit false is a real
+    // CLI opt-out; testing truthiness here would always override client from the config file.
+    ...(flags.client === false ? { client: false } : {}),
     ...(flags.pretty ? { pretty: true } : {}),
     ...(flags.verbose ? { verbose: true } : {}),
     crawler: {
@@ -42,6 +45,10 @@ async function main(): Promise<void> {
       ...(flags.timeout !== undefined ? { timeout: flags.timeout } : {}),
       ...(flags.userAgent ? { userAgent: flags.userAgent } : {}),
       ...(flags.hreflang ? { hreflang: flags.hreflang } : {}),
+      // commander defaults a --no-x flag to true, so only an explicit false is a real
+      // CLI opt-out; testing truthiness here would always override crawler.skipNoindex
+      // coming from the config file.
+      ...(flags.skipNoindex === false ? { skipNoindex: false } : {}),
     },
     ...(flags.fields || flags.stopWords
       ? {

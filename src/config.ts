@@ -63,7 +63,7 @@ export function resolveOptions(options: GeneratorOptions): ResolvedOptions {
       stopWords: resolveStopWords(options.search?.stopWords),
     },
     ...(options.baseUrl ? { baseUrl: options.baseUrl } : {}),
-    client: options.client ?? false,
+    client: options.client ?? true,
     pretty: options.pretty ?? false,
     verbose: options.verbose ?? false,
   };

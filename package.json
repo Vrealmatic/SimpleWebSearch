@@ -1,6 +1,6 @@
 {
   "name": "heading-search-index",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Generate a client-side MiniSearch index from page headings discovered through sitemaps.",
   "type": "module",
   "license": "MIT",

@@ -21,9 +21,25 @@ export async function generateSearchIndex(input: GeneratorOptions): Promise<Gene
   const started = Date.now();
   const startedAt = new Date(started).toISOString();
   const urls = await discoverUrls(options.sitemap, options.crawler);
+  if (options.verbose) console.log(`Discovered ${urls.length} URLs from ${options.sitemap}`);
+  if (urls.length === 0)
+    throw new Error(
+      options.crawler.hreflang
+        ? `No URLs found in ${options.sitemap} with an hreflang "${options.crawler.hreflang}" alternate`
+        : `No URLs found in ${options.sitemap}`,
+    );
   const crawled = await crawlPages(urls, options);
-  if (crawled.documents.length === 0)
-    throw new Error(`No pages were successfully indexed from ${options.sitemap}`);
+  if (crawled.documents.length === 0) {
+    const skipped = crawled.skipped + crawled.duplicateCanonicals.length;
+    const first = crawled.failures[0];
+    throw new Error(
+      `No pages were successfully indexed from ${options.sitemap} ` +
+        `(discovered ${urls.length}, skipped ${skipped}, failed ${crawled.failures.length})` +
+        (first
+          ? `; first failure: ${first.url}${first.status ? ` [${first.status}]` : ""} — ${first.message}`
+          : ""),
+    );
+  }
   const finished = Date.now();
   const report: SearchReport = {
     startedAt,

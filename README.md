@@ -13,13 +13,15 @@ npm install --save-dev heading-search-index
 npx heading-search-index --sitemap https://example.com/sitemap.xml --output ./public/search
 ```
 
-All options: `--sitemap`, `--output`, `--fields`, `--include-selector`, `--exclude-selector`, `--concurrency`, `--timeout`, `--base-url`, `--user-agent`, `--hreflang`, `--stop-words`, `--client`, `--config`, `--pretty`, `--verbose`. Sitemap and output are required unless supplied by a config file. CLI values override config values.
+All options: `--sitemap`, `--output`, `--fields`, `--include-selector`, `--exclude-selector`, `--concurrency`, `--timeout`, `--base-url`, `--user-agent`, `--hreflang`, `--no-skip-noindex`, `--stop-words`, `--no-client`, `--config`, `--pretty`, `--verbose`. Sitemap and output are required unless supplied by a config file. CLI values override config values.
 
 `includeSelector` limits extraction to a page region (e.g. `main`). `excludeSelector` removes elements inside that region before extraction (e.g. breadcrumbs, sidebars, `[data-search-ignore]`).
 
 For multilingual sitemaps with `xhtml:link rel="alternate"` annotations, `--hreflang` (or `crawler.hreflang` in config) keeps only the alternate URL matching the given language (e.g. `cs`, `en`, `x-default`); entries without a matching alternate are skipped. To build one index per language, run the generator once per language over the same sitemap with different `--hreflang` and `--output` values. Without the option, alternates are ignored and every `<loc>` is indexed as before.
 
-Add `--client` to also write a ready-to-serve browser ESM bundle (`search-client.js`) that includes MiniSearch. Without a bundler in the consuming site, this is the easiest deployment path.
+Pages carrying a robots `noindex` meta tag are skipped by default; pass `--no-skip-noindex` (or set `crawler.skipNoindex: false` in config) to index them anyway, which is what you want on a staging or pre-launch site.
+
+A ready-to-serve browser ESM bundle (`search-client.js`) that includes MiniSearch is written alongside the index by default, so the generated directory works as a static deployment with no bundler in the consuming site. Pass `--no-client` (or set `client: false` in config) to skip it — useful when the site imports `heading-search-index/client` through its own bundler and the extra file would only be dead weight in the build output.
 
 ## Configuration
 
@@ -54,7 +56,7 @@ Run with `npx heading-search-index --config heading-search.config.ts`. `search.s
 
 ```text
 public/search/
-├── search-client.js      ← written only with --client
+├── search-client.js      ← browser bundle, omitted with --no-client
 ├── search-index.json     ← serialized MiniSearch index
 ├── search-config.json    ← fields, boosts, search defaults
 ├── search-documents.json ← readable audit data (not needed at runtime)
@@ -257,8 +259,8 @@ Other scripts: `npm test` (Vitest), `npm run typecheck`, `npm run lint`, `npm ru
 
 ```bash
 npm run build
-# then either re-run the CLI with --client to emit a fresh search-client.js…
-npx heading-search-index --sitemap https://example.com/sitemap.xml --output ./public/search --client
+# then either re-run the CLI to emit a fresh search-client.js…
+npx heading-search-index --sitemap https://example.com/sitemap.xml --output ./public/search
 # …or just copy the rebuilt bundle directly:
 cp dist/client.js ./public/search/search-client.js
 ```
