@@ -121,6 +121,9 @@ async function attachSearchToElement(area: HTMLElement): Promise<() => void> {
       setPanelHidden(true);
     }
   };
+  // Touch browsers (notably iOS Safari) do not focus a tapped link, so focusout reports a null
+  // relatedTarget and would hide the panel before the click lands. Keep focus on the input instead.
+  const handlePanelMouseDown = (e: MouseEvent): void => e.preventDefault();
 
   const detach = await attachSearchWithOptions({
     input,
@@ -133,12 +136,14 @@ async function attachSearchToElement(area: HTMLElement): Promise<() => void> {
   trigger?.addEventListener("click", handleTrigger);
   form?.addEventListener("submit", handleSubmit);
   area.addEventListener("focusout", handleFocusOut);
+  panel.addEventListener("mousedown", handlePanelMouseDown);
 
   return () => {
     detach();
     trigger?.removeEventListener("click", handleTrigger);
     form?.removeEventListener("submit", handleSubmit);
     area.removeEventListener("focusout", handleFocusOut);
+    panel.removeEventListener("mousedown", handlePanelMouseDown);
   };
 }
 
